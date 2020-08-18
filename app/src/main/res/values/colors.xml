@@ -6,4 +6,15 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="gray">#C5C5C5</color>
+    <color name="dark_gray">#A8A8A8</color>
+    <color name="transperant">#28A8A8A8</color>
+    <color name="white_black">#EFEFEF</color>
+    <color name="light_blue">#F4FCFF</color>
+    <color name="place_background">#25C5C5C5</color>
+    <color name="place_background2">#9CC5C5C5</color>
+    <color name="sky_blue">#237295</color>
+    <color name="new_color">#03A9F4</color>
+    <color name="light_gray">#C6D8D8D8</color>
+    <color name="text_color">#C6353535</color>
+    <color name="dark_gray_2">#F2838383</color>
 </resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@color/white">
+
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/one"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/abcd"/>
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="145dp"
+        android:layout_height="20dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/profile_round"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/one"
+        android:id="@+id/pm"
+        android:weightSum="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Antonia Berger"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="2dp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thank you ,just let me know when..."
+                android:textSize="15dp"
+                android:minLines="1"
+                android:maxLines="1"
+                android:textColor="@color/gray"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4min"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/gray"
+                android:textStyle="bold"
+                android:layout_margin="2dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:text="2"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/gray"
+                android:textStyle="bold"
+                android:background="@drawable/edit_bg_round_blue"
+                android:layout_gravity="right"
+                />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/left_arrow"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Favourite"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/one"
+        android:id="@+id/view"
+        android:background="@color/gray"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/topbar">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10 Product Found"
+                android:textSize="16dp"
+                android:layout_weight="1.2"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                />
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+            <include layout="@layout/item_favourite"/>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

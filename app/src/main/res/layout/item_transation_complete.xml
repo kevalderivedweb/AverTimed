@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:text="$210"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_weight="1.5"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Tiffuny Aguilar"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_weight="0.5"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:text=""
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_weight="1.5"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:text="15 April 2020"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:layout_weight="0.5"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="   Completed   "
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/edit_bg__blue_2"
+            android:layout_weight="0.5"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

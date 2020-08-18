@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SignUp_Activity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/rectangle"
+        android:scaleType="fitXY"
+        android:layout_alignParentBottom="true"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/left_arrow"
+            android:scaleType="fitXY"
+            android:layout_alignParentBottom="true"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Forgot Password"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Please enter your email address.You will \nreceive a link to create a new password \nvia email. "
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"/>
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginLeft="10dp"
+            android:text="Email Address"
+            android:textColor="@color/gray"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/ed_forgot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_bg"
+            android:hint="Input your email address"
+            android:maxLines="1"
+            android:textSize="48px"
+            android:textColor="#282828"
+            android:singleLine="true" />
+
+
+        <ImageView
+            android:id="@+id/m_done"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/next"
+            android:scaleType="fitXY" />
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"/>
+</RelativeLayout>

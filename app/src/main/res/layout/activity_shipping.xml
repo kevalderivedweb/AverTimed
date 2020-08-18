@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/one"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/left_arrow"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Shipping Address"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/one"
+        android:id="@+id/view"
+        android:background="@color/gray"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_above="@+id/bottom"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:orientation="vertical">
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray_2"
+        android:text="First Name"
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:textSize="14dp"
+        android:textStyle="normal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your First Name"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="Last Name"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Last Name"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="14dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="Address 1"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Address 1"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="14dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="Address 2"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Address 2"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="State/Province"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please select State or Province"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:drawableRight="@drawable/ic_action_down"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="Country"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please select your contry"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:drawableRight="@drawable/ic_action_down"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray_2"
+            android:text="Zip/Postal Code"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please Enter you Zip or Postal Code"
+            android:background="@drawable/edit_bg_3"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"/>
+
+
+    </LinearLayout>
+
+
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+
+
+
+        <TextView
+            android:id="@+id/place_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textSize="16dp"
+            android:textStyle="normal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_bg__blue_qt"
+            android:textColor="@color/white"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginRight="130dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

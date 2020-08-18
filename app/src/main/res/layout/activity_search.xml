@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.8">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/left_arrow"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/search_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_bg_3"
+            android:hint=" Brand, Model, Product Name"
+            android:maxLines="1"
+            android:drawableLeft="@mipmap/search"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:inputType="none"
+            android:layout_gravity="center"
+            android:textSize="13dp"
+            android:textColor="#282828"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_below="@+id/topbar">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                android:background="@color/gray"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recent Keayword"
+                android:textSize="18dp"
+                android:layout_weight="1.2"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blood pressure Monitor"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_bg_search"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stethoscpes"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_bg_search"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spirometers"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_bg_search"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medical thermoter"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_bg_search"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recent Search"
+                android:textSize="18dp"
+                android:layout_weight="1.2"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                />
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+
+            <include layout="@layout/item_newproduct_search"/>
+
+            
+            <include layout="@layout/item_newproduct_search"/>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

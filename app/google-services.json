@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667300994304",
+    "firebase_url": "https://avertimed.firebaseio.com",
+    "project_id": "avertimed",
+    "storage_bucket": "avertimed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667300994304:android:092e398158a45ec20067e5",
+        "android_client_info": {
+          "package_name": "com.example.avertimed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667300994304-padmrlmrdf760vu3dgi9t9lt0trteila.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.avertimed",
+            "certificate_hash": "bdbe2531d99769457071e36aef77f67d36f49812"
+          }
+        },
+        {
+          "client_id": "667300994304-v0npk1n3rrdshp56ap2uqd1cdc0p76ve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ32wefbixlQVYoaXzgzgv9WFOY-rnWsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667300994304-v0npk1n3rrdshp56ap2uqd1cdc0p76ve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

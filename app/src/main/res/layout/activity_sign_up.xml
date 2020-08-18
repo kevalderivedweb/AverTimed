@@ -22,10 +22,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
             <ImageView
+                android:id="@+id/back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
@@ -43,14 +44,15 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="What's your intrest ? "
-                android:textSize="25dp"
+                android:textSize="16dp"
+                android:visibility="gone"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"/>
@@ -61,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:weightSum="2">
 
 
@@ -72,6 +75,7 @@
                     android:weightSum="2">
 
                     <ImageView
+                        android:id="@+id/img1"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
@@ -104,6 +108,7 @@
                     android:weightSum="2">
 
                     <ImageView
+                        android:id="@+id/img2"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
@@ -138,15 +143,17 @@
                 android:layout_marginLeft="10dp"
                 android:text="First Name"
                 android:textColor="@color/gray"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/ed_fristname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
+                
                 android:background="@drawable/edit_bg"
                 android:hint="Input your first name"
                 android:maxLines="1"
@@ -161,15 +168,17 @@
                 android:layout_marginLeft="10dp"
                 android:text="Last Name"
                 android:textColor="@color/gray"
-                android:layout_marginTop="10dp"
+                
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/ed_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
+                
                 android:background="@drawable/edit_bg"
                 android:hint="Input your last name"
                 android:maxLines="1"
@@ -185,17 +194,19 @@
                 android:layout_marginLeft="10dp"
                 android:text="Email"
                 android:textColor="@color/gray"
-                android:layout_marginTop="10dp"
+                
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/ed_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_bg"
-                android:hint="Input your first name"
+                
+                android:hint="input your email address"
                 android:maxLines="1"
                 android:textSize="48px"
                 android:textColor="#282828"
@@ -209,31 +220,50 @@
                 android:layout_marginLeft="10dp"
                 android:text="Password"
                 android:textColor="@color/gray"
-                android:layout_marginTop="10dp"
+                
                 android:textSize="15dp" />
 
 
+<!--
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutTextInput"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/show_password_selector"
-                android:textColorHint="@color/gray"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edit_bg"
-                    android:hint="Input your Password"
-                    android:maxLines="1"
-                    android:textSize="48px"
-                    android:textColor="#282828"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
 
+                android:id="@+id/etPasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:passwordToggleEnabled="true"
+                app:hintEnabled="false"
+                app:passwordToggleTint="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_bg"
+                android:hint="input your password"
+                android:maxLines="1"
+                android:textSize="48px"
+                android:textColor="#282828"/>
+            </com.google.android.material.textfield.TextInputLayout>
+-->
+
+            <EditText
+                android:id="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_bg"
+                android:hint="input your password"
+                
+                android:maxLines="1"
+                android:textSize="48px"
+                android:textColor="#282828"
+                android:singleLine="true" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -242,36 +272,61 @@
                 android:layout_marginLeft="10dp"
                 android:text="Confrim Password"
                 android:textColor="@color/gray"
-                android:layout_marginTop="10dp"
+                
                 android:textSize="15dp" />
 
 
+<!--
             <com.google.android.material.textfield.TextInputLayout
-                app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/show_password_selector"
-                android:textColorHint="@color/gray"
+
+                android:id="@+id/etPasswordLayout_c"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-                <EditText
+                app:passwordToggleEnabled="true"
+                app:hintEnabled="false"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:passwordToggleTint="@android:color/black">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_bg"
-                    android:hint="Re-enter your Password"
+                    android:hint="Re-enter your password"
                     android:maxLines="1"
                     android:textSize="48px"
-                    android:textColor="#282828"
-                    android:singleLine="true" />
+                    android:textColor="#282828"/>
             </com.google.android.material.textfield.TextInputLayout>
+-->
+
+            <EditText
+                android:id="@+id/ed_password2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_bg"
+                android:hint="Re-enter your password"
+                android:maxLines="1"
+                
+                android:inputType="textPassword"
+                android:textSize="48px"
+                android:textColor="#282828"
+                android:singleLine="true" />
+
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:id="@+id/m_done"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="50dp"
                 android:src="@drawable/next"
                 android:scaleType="fitXY" />
 
@@ -279,10 +334,11 @@
 
 
             <TextView
+                android:id="@+id/m_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Already have an account ? sign in"
+                android:textColor="@color/text_color"
+                android:text="Already have an account? sign in"
                 android:textSize="15dp"
                 android:layout_gravity="center"
                 android:gravity="center"
