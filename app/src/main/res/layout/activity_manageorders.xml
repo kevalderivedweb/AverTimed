@@ -38,123 +38,72 @@
         android:id="@+id/view"
         android:background="@color/gray"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/view">
-
     <LinearLayout
+        android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/view">
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:layout_below="@+id/view">
 
-        <include layout="@layout/item_mangeorder_time" />
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
+        <LinearLayout
+            android:id="@+id/current"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/sky_blue">
 
-        <include layout="@layout/item_categories_order" />
+            <TextView
+                android:id="@+id/txt_current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Order"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                />
 
-        <View
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/past"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray"/>
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/white">
 
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_mangeorder_time" />
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
-
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
+            <TextView
+                android:id="@+id/txt_past"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Past Order"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                />
 
 
-        <include layout="@layout/item_categories_order" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/gray"/>
+        </LinearLayout>
 
     </LinearLayout>
 
 
-
-    </ScrollView>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/category_view"
+        android:layout_below="@+id/status"
+        android:layout_marginTop="10dp"
+        android:nestedScrollingEnabled="false"
+        android:layout_height="wrap_content"/>
 
 
     <View

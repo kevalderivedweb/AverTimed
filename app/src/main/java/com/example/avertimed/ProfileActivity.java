@@ -123,6 +123,45 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout ln_home = findViewById(R.id.ln_home);
+        ln_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProfileActivity.this,ProductActivity.class);
+                startActivity(i);
+
+            }
+        });
+        LinearLayout transaction = findViewById(R.id.transaction);
+        transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProfileActivity.this,TransactionActivity.class);
+                startActivity(i);
+
+
+            }
+        });
+        LinearLayout profile=(LinearLayout) findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this,ProfileActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        LinearLayout ln_category=(LinearLayout) findViewById(R.id.ln_category);
+        ln_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProfileActivity.this,AllCategories.class);
+                startActivity(i);
+
+            }
+        });
+
+
         GetProfile();
     }
 
@@ -160,7 +199,7 @@ public class ProfileActivity extends AppCompatActivity {
                     cart_count.setText("0");
                     history_count.setText("0");
 
-                    Toast.makeText(ProfileActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ProfileActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

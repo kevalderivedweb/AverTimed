@@ -67,6 +67,9 @@ public class EditProfile extends AppCompatActivity {
 
         session = new UserSession(getApplicationContext());
 
+        first_name.setText(session.getFirstName());
+        last_name.setText(session.getLastName());
+        email.setText(session.getEmail());
 
         Update.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -195,6 +195,18 @@ public class UserSession {
         return pref.getString(KEY_USER_ID, "");
     }
 
+    public String getFirstName() {
+        return pref.getString(KEY_NAME, "");
+    }
+
+    public String getLastName() {
+        return pref.getString(KEY_LNAME, "");
+    }
+
+    public String getEmail() {
+        return pref.getString(KEY_EMAIL, "");
+    }
+
 
     public String getUserImagd() {
         return pref.getString(KEY_PHOTO, "");

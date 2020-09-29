@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.avertimed.API.CategoryRequest;
 import com.example.avertimed.API.HomeRequest;
 import com.example.avertimed.API.ProductRequest;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.NewProductAdapter;
 import com.example.avertimed.Model.CategoryModel;
 import com.google.android.material.tabs.TabLayout;
@@ -41,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -72,6 +74,7 @@ public class ProductActivity extends AppCompatActivity {
     private ArrayList<CategoryModel> categoryModels_Cat=  new ArrayList<>();
     private ArrayList<CategoryModel> categoryModels_NewProduct = new ArrayList<>();
     private ArrayList<CategoryModel> categoryModels_TopTrend=new ArrayList<>();
+    private UserSession userSession;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -90,7 +93,13 @@ public class ProductActivity extends AppCompatActivity {
         search_activity=(TextView) findViewById(R.id.search_activity);
         profile=(LinearLayout) findViewById(R.id.profile);
         ln_message=(LinearLayout) findViewById(R.id.ln_message);
-        ln_category=(LinearLayout) findViewById(R.id.ln_category);
+        userSession = new UserSession(getApplicationContext());
+
+
+
+
+
+
 
         transaction = findViewById(R.id.transaction);
 
@@ -113,13 +122,7 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-        ln_category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i  = new Intent(ProductActivity.this,AllCategories.class);
-                startActivity(i);
-            }
-        });
+
 
         findViewById(R.id.msg).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,14 +146,6 @@ public class ProductActivity extends AppCompatActivity {
 
 
 
-        transaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i  = new Intent(ProductActivity.this,TransactionActivity.class);
-                startActivity(i);
-
-            }
-        });
 
 
 
@@ -173,7 +168,7 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
         new_product.setAdapter(New_Product_mAdapter);
-        new_product.setNestedScrollingEnabled(true);
+        new_product.setNestedScrollingEnabled(false);
         mAdapter = new SugestAdapter(categoryModels_Cat, new SugestAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
@@ -183,7 +178,7 @@ public class ProductActivity extends AppCompatActivity {
         c_rvreq.setHasFixedSize(true);
         c_rvreq.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         c_rvreq.setAdapter(mAdapter);
-        c_rvreq.setNestedScrollingEnabled(true);
+        c_rvreq.setNestedScrollingEnabled(false);
 
         mAdapter_2 = new SugestAdapter2(categoryModels_TopTrend,new SugestAdapter2.OnItemClickListener() {
             @Override
@@ -209,7 +204,7 @@ public class ProductActivity extends AppCompatActivity {
         top_trend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProductActivity.this,AllCategories.class);
+                Intent intent = new Intent(ProductActivity.this,AllTopTrends.class);
                 startActivity(intent);
             }
         });
@@ -223,13 +218,7 @@ public class ProductActivity extends AppCompatActivity {
             }
         });*/
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProductActivity.this,ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         newproduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,6 +237,65 @@ public class ProductActivity extends AppCompatActivity {
         });
 
         GetCategory();
+     LinearLayout   ln_home = findViewById(R.id.ln_home);
+        ln_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProductActivity.this,ProductActivity.class);
+                startActivity(i);
+
+            }
+        });
+        transaction = findViewById(R.id.transaction);
+        transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProductActivity.this,TransactionActivity.class);
+                startActivity(i);
+
+
+            }
+        });
+        profile=(LinearLayout) findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(userSession.isLoggedIn()){
+
+                    Intent intent=new Intent(ProductActivity.this, ProfileActivity.class);
+                    if(getIntent().getExtras()!=null) {
+                        intent.putExtras(getIntent().getExtras());
+                        setIntent(null);
+                    }
+
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+
+                }else {
+
+                    Intent intent=new Intent(ProductActivity.this, Login_Activity.class);
+                    if(getIntent().getExtras()!=null) {
+                        intent.putExtras(getIntent().getExtras());
+                        setIntent(null);
+                    }
+
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+
+                }
+
+            }
+        });
+        ln_category=(LinearLayout) findViewById(R.id.ln_category);
+        ln_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i  = new Intent(ProductActivity.this,AllCategories.class);
+                startActivity(i);
+            }
+        });
 
 
     }

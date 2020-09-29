@@ -1,42 +1,53 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.AllCategories;
 import com.example.avertimed.Model.CategoryModel;
+import com.example.avertimed.Model.OrderModel;
 import com.example.avertimed.R;
+import com.example.avertimed.SubCategories;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAdapter.MyViewHolder> {
 
     private final OnItemClickListener listener;
-    private ArrayList<CategoryModel> mDataset;
+    private ArrayList<OrderModel> mDataset;
+    private SubProductAdapter mAdapter;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView img;
+
         // each data item is just a string in this case
-        public TextView textView;
+        public TextView order_num,price,date;
+        RecyclerView category_view;
 
 
         public MyViewHolder(View v) {
             super(v);
-            this.textView = (TextView) itemView.findViewById(R.id.name);
-            this.img = (ImageView) itemView.findViewById(R.id.img);
+            this.order_num = (TextView) itemView.findViewById(R.id.order_num);
+            this.price = (TextView) itemView.findViewById(R.id.price);
+            this.date = (TextView) itemView.findViewById(R.id.date);
+            category_view =(RecyclerView) itemView.findViewById(R.id.category_view);
         }
+
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CategoryAdapter(ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+    public CurrentProductAdapter(ArrayList<OrderModel> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
     }
@@ -49,7 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         // create a new view
         View v = layoutInflater
-                .inflate(R.layout.item_categories, parent, false);
+                .inflate(R.layout.item_mangeorder_time, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -60,7 +71,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
-        holder.textView.setText(mDataset.get(position).getCat_name_en());
+        holder.order_num.setText("Order No "+mDataset.get(position).getUserOrderID());
+        holder.price.setText("$ "+mDataset.get(position).getTotalAmount());
+        holder.date.setText(mDataset.get(position).getDate());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +82,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             }
         });
 
+
+        mAdapter = new SubProductAdapter(mDataset.get(position).getProducts(), new SubProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int item) {
+
+            }
+        });
+        holder.category_view.setHasFixedSize(true);
+        holder.category_view.setLayoutManager(new LinearLayoutManager(holder.category_view.getContext(), LinearLayoutManager.VERTICAL, false));
+        holder.category_view.setAdapter(mAdapter);
+        holder.category_view.setNestedScrollingEnabled(false);
+
+/*
         Glide.with(holder.img.getContext()).load(mDataset.get(position).getCat_name_image()).placeholder(R.drawable.product_1).into(holder.img);
+*/
 
     }
 

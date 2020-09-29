@@ -41,32 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
 
-
-                if(userSession.isLoggedIn()){
-
-                    Intent intent=new Intent(MainActivity.this, ProductActivity.class);
-                    if(getIntent().getExtras()!=null) {
-                        intent.putExtras(getIntent().getExtras());
-                        setIntent(null);
-                    }
-
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                    finish();
-
-                }else {
-
-                    Intent intent=new Intent(MainActivity.this, Login_Activity.class);
-                    if(getIntent().getExtras()!=null) {
-                        intent.putExtras(getIntent().getExtras());
-                        setIntent(null);
-                    }
-
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                    finish();
-
+                Intent intent=new Intent(MainActivity.this, ProductActivity.class);
+                if(getIntent().getExtras()!=null) {
+                    intent.putExtras(getIntent().getExtras());
+                    setIntent(null);
                 }
+
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                finish();
+
             }
         }.start();
 

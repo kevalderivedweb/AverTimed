@@ -62,7 +62,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         // holder.textView.setText(mDataset[position]);
         holder.textView.setText(mDataset.get(position).getCat_name_en());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onItemClick(position);

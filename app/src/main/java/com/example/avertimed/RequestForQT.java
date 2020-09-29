@@ -62,6 +62,7 @@ public class RequestForQT extends AppCompatActivity {
             }
         });
         requestQueue = Volley.newRequestQueue(RequestForQT.this);//Creating the RequestQueue
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
         session = new UserSession(getApplicationContext());

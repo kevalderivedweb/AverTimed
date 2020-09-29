@@ -2,12 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/bg">
 
     <LinearLayout
         android:id="@+id/one"
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:visibility="visible"
         android:layout_height="50dp">
 
         <ImageView
@@ -40,6 +41,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_below="@+id/view"
+        android:visibility="visible"
         android:layout_above="@+id/bottom"
         android:layout_height="match_parent">
         <LinearLayout
@@ -140,36 +142,6 @@
 
 
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-
-
-
-
-
-
-
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/rectangle"
-        android:scaleType="fitXY"
-        android:layout_alignParentBottom="true"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:layout_marginRight="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"/>
 
 
 </RelativeLayout>

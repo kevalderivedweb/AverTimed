@@ -65,7 +65,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
         holder.textView.setText(mDataset.get(position).getDescription());
         holder.txt_price.setText("$"+mDataset.get(position).getTxt_price());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onItemClick(position);

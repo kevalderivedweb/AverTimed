@@ -16,6 +16,7 @@
         android:weightSum="2">
 
         <TextView
+            android:id="@+id/order_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
@@ -27,6 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
@@ -51,6 +53,7 @@
         android:weightSum="2">
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
@@ -74,5 +77,13 @@
 
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/category_view"
+        android:layout_below="@+id/category"
+        android:layout_marginTop="10dp"
+        android:nestedScrollingEnabled="false"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

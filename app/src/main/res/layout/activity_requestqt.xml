@@ -42,12 +42,13 @@
         android:layout_below="@+id/view"
         android:layout_above="@+id/bottom"
         android:background="@color/white"
+        android:windowSoftInputMode="adjustPan|adjustResize"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -231,53 +232,55 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_bg_3"
                 android:layout_marginTop="5dp"
-                android:minLines="4"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginRight="10dp"/>
 
+
+            <LinearLayout
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_alignParentBottom="true">
+
+
+
+
+                <TextView
+                    android:id="@+id/place_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send"
+                    android:textSize="16dp"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="120dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_bg__blue_qt"
+                    android:textColor="@color/white"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginRight="130dp"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorPrimary"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
 
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
-
-
-
-
-        <TextView
-            android:id="@+id/place_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:textSize="16dp"
-            android:textStyle="normal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_bg__blue_qt"
-            android:textColor="@color/white"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:layout_marginRight="130dp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

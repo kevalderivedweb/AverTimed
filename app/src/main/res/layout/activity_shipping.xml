@@ -62,6 +62,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your First Name"
@@ -83,6 +84,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_lastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Last Name"
@@ -104,6 +106,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_ad1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Address 1"
@@ -125,6 +128,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_ad2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Address 2"
@@ -146,13 +150,13 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Please select State or Province"
             android:background="@drawable/edit_bg_3"
             android:layout_marginTop="5dp"
             android:textSize="14dp"
-            android:drawableRight="@drawable/ic_action_down"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"/>
 
@@ -168,13 +172,13 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_contry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Please select your contry"
             android:background="@drawable/edit_bg_3"
             android:layout_marginTop="5dp"
             android:textSize="14dp"
-            android:drawableRight="@drawable/ic_action_down"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"/>
 
@@ -191,6 +195,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp" />
         <EditText
+            android:id="@+id/sh_pincode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Please Enter you Zip or Postal Code"

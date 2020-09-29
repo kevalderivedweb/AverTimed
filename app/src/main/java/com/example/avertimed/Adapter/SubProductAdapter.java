@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.avertimed.Model.CategoryModel;
+import com.example.avertimed.Model.Product;
 import com.example.avertimed.R;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+public class SubProductAdapter extends RecyclerView.Adapter<SubProductAdapter.MyViewHolder> {
 
     private final OnItemClickListener listener;
-    private ArrayList<CategoryModel> mDataset;
+    private ArrayList<Product> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,18 +26,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private final ImageView img;
         // each data item is just a string in this case
-        public TextView textView;
+        public TextView textView,date,price;
 
 
         public MyViewHolder(View v) {
             super(v);
-            this.textView = (TextView) itemView.findViewById(R.id.name);
+            this.textView = (TextView) itemView.findViewById(R.id.title);
+            this.date = (TextView) itemView.findViewById(R.id.date);
+            this.price = (TextView) itemView.findViewById(R.id.price);
             this.img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CategoryAdapter(ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+    public SubProductAdapter(ArrayList<Product> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
     }
@@ -49,7 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         // create a new view
         View v = layoutInflater
-                .inflate(R.layout.item_categories, parent, false);
+                .inflate(R.layout.item_categories_order, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -60,7 +63,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
-        holder.textView.setText(mDataset.get(position).getCat_name_en());
+        holder.textView.setText(mDataset.get(position).getProductTitleEn());
+        holder.price.setText(mDataset.get(position).getPrice());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +73,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             }
         });
 
-        Glide.with(holder.img.getContext()).load(mDataset.get(position).getCat_name_image()).placeholder(R.drawable.product_1).into(holder.img);
+        Glide.with(holder.img.getContext()).load(mDataset.get(position).getProductImage()).placeholder(R.drawable.product_1).into(holder.img);
 
     }
 

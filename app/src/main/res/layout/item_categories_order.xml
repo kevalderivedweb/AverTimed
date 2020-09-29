@@ -44,6 +44,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cardiology"
@@ -54,6 +55,7 @@
                 android:layout_gravity="center"
                 />
             <TextView
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="15 April 2020"
@@ -90,6 +92,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$500"
