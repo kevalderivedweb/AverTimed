@@ -39,90 +39,13 @@
         android:id="@+id/view"
         android:background="@color/gray"/>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/category_view"
         android:layout_below="@+id/view"
-        android:layout_above="@+id/bottom">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:layout_below="@id/view">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Hello,"
-            android:layout_gravity="center"
-            android:gravity="start"
-            android:textSize="16dp"
-            android:textStyle="normal"
-            android:layout_marginLeft="10dp" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="John Anderson"
-            android:layout_gravity="center"
-            android:gravity="start"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp" />
-
-
-        <include layout="@layout/item_transaction_no" />
-        <include layout="@layout/item_transation_complete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-        <include layout="@layout/item_transation_incomplete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-        <include layout="@layout/item_transation_incomplete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-
-
-        
-
-        <include layout="@layout/item_transaction_no" />
-        <include layout="@layout/item_transation_complete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-        <include layout="@layout/item_transation_incomplete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-
-        <include layout="@layout/item_transation_incomplete" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_gray"/>
-
-
-
-    </LinearLayout>
-
-
-    </ScrollView>
-
+        android:nestedScrollingEnabled="false"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/bottom"

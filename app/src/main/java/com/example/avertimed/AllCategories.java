@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.avertimed.API.CategoryRequest;
 import com.example.avertimed.API.LoginRequest;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.CategoryAdapter;
 import com.example.avertimed.Model.CategoryModel;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -33,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AllCategories extends AppCompatActivity {
 
@@ -41,6 +45,7 @@ public class AllCategories extends AppCompatActivity {
     private RecyclerView category_view;
     private CategoryAdapter mAdapter;
     private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+    private UserSession session;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -75,7 +80,7 @@ public class AllCategories extends AppCompatActivity {
         category_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         category_view.setAdapter(mAdapter);
         category_view.setNestedScrollingEnabled(false);
-
+        session = new UserSession(getApplicationContext());
         GetCategory();
 
 
@@ -135,8 +140,16 @@ public class AllCategories extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(AllCategories.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+             params.put("Accept", "application/json");
+            params.put("Authorization","Bearer "+ session.getAPIToken());
+            return params;
+        }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

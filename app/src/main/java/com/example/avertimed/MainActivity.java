@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
 
-                Intent intent=new Intent(MainActivity.this, ProductActivity.class);
+                Intent intent=new Intent(MainActivity.this, Login_Activity.class);
                 if(getIntent().getExtras()!=null) {
                     intent.putExtras(getIntent().getExtras());
                     setIntent(null);

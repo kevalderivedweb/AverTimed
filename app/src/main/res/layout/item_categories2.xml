@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="1265 Items"
                 android:textSize="15dp"
-
+                android:id="@+id/item"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/gray"
                 android:textStyle="bold"

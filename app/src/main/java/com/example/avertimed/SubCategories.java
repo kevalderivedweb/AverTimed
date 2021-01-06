@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.avertimed.API.CategoryRequest;
 import com.example.avertimed.API.SubCategoryRequest;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.CategoryAdapter;
 import com.example.avertimed.Adapter.SubCategoryAdapter;
 import com.example.avertimed.Model.CategoryModel;
@@ -34,6 +36,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SubCategories extends AppCompatActivity {
 
@@ -42,6 +46,7 @@ public class SubCategories extends AppCompatActivity {
     private SubCategoryAdapter mAdapter;
     private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
     private int Category_id;
+    private UserSession userSession;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -53,7 +58,7 @@ public class SubCategories extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
 
-        
+        userSession = new UserSession(getApplicationContext());
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +161,15 @@ public class SubCategories extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(SubCategories.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        });
-        loginRequest.setTag("TAG");
+        }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("Accept", "application/json");
+            params.put("Authorization","Bearer "+ userSession.getAPIToken());
+            return params;
+        }};        loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

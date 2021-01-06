@@ -132,11 +132,13 @@ public class ChangePassword extends AppCompatActivity {
         }){@Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-               // params.put("Accept", "application/json");
+                params.put("Accept", "application/json");
                 params.put("Authorization","Bearer "+ session.getAPIToken());
                 return params;
             }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

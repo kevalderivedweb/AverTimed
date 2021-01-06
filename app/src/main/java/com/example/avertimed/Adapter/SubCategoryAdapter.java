@@ -26,11 +26,13 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         private final ImageView img;
         // each data item is just a string in this case
         public TextView textView;
+        public TextView item;
 
 
         public MyViewHolder(View v) {
             super(v);
             this.textView = (TextView) itemView.findViewById(R.id.name);
+            this.item = (TextView) itemView.findViewById(R.id.item);
             this.img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
@@ -61,6 +63,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
         holder.textView.setText(mDataset.get(position).getCat_name_en());
+        holder.item.setText(""+mDataset.size()+" items");
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

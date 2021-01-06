@@ -1,5 +1,6 @@
 package com.example.avertimed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.avertimed.API.ChangePasswordRequest;
 import com.example.avertimed.API.ProfileRequest;
 import com.example.avertimed.API.UserSession;
@@ -33,18 +35,23 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView setting;
+    ImageView img;
     private LinearLayout manage_order;
     private LinearLayout ln_shipping;
     private LinearLayout ln_logout;
     private RequestQueue requestQueue;
     private UserSession session;
-
+    private DbHelper_MultipleData dbHelper;
+    private List<FavDatabaseModel> DataArrayList;
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +69,35 @@ public class ProfileActivity extends AppCompatActivity {
 
         session = new UserSession(getApplicationContext());
 
+
+
+        dbHelper = new DbHelper_MultipleData(ProfileActivity.this);
+        DataArrayList = new ArrayList<>();
+        DataArrayList = dbHelper.getFav_Rec();
+
+
+
         setting = findViewById(R.id.setting);
+        img = findViewById(R.id.img);
+        LinearLayout cart = findViewById(R.id.cart);
         manage_order = findViewById(R.id.manage_order);
         ln_shipping = findViewById(R.id.ln_shipping);
         ln_logout = findViewById(R.id.ln_logout);
+        TextView cart_count = findViewById(R.id.cart_count);
 
+        int Size = DataArrayList.size();
+        cart_count.setText(""+Size);
+
+        Log.e("Size",""+Size);
+
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(ProfileActivity.this, ViewCart.class);
+                startActivity(intent);
+            }
+        });
         ln_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +126,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i  = new Intent(ProfileActivity.this,ManageOrderActivity.class);
+                i.putExtra("Order","1");
                 startActivity(i);
             }
         });
@@ -118,7 +150,8 @@ public class ProfileActivity extends AppCompatActivity {
          findViewById(R.id.history).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(ProfileActivity.this,OrderHistoryActivity.class);
+                Intent i  = new Intent(ProfileActivity.this,ManageOrderActivity.class);
+                i.putExtra("Order","2");
                 startActivity(i);
             }
         });
@@ -196,12 +229,14 @@ public class ProfileActivity extends AppCompatActivity {
                     name.setText(jsonObject1.getString("FirstName"));
                     location.setText(jsonObject1.getString("City")+" , "+jsonObject1.getString("Country"));
                     fav_count.setText(jsonObject1.getString("FavouriteProductCnt"));
-                    cart_count.setText("0");
+                    //cart_count.setText("0");
                     history_count.setText("0");
+                    Glide.with(ProfileActivity.this).load(jsonObject1.getString("ProfilePic")).placeholder(R.drawable.abcd).circleCrop().into(img);
 
                   //  Toast.makeText(ProfileActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(ProfileActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -225,6 +260,8 @@ public class ProfileActivity extends AppCompatActivity {
             return params;
         }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

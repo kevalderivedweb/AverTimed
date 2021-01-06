@@ -3,4 +3,12 @@
     <string name="Password">Password</string>
     <string name="facebook_app_id">331181594719928</string>
     <string name="fb_login_protocol_scheme">fb331181594719928</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="gallary">Gallary</string>
+    <string name="select_option">Select Option</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="low_price">Low Price</string>
+    <string name="high">High Price</string>
+    <string name="filter">Search Filter</string>
 </resources>

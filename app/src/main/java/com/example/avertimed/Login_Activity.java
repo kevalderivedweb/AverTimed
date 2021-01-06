@@ -30,6 +30,10 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.avertimed.API.LoginRequest;
 import com.example.avertimed.API.LoginSocialRequest;
 import com.example.avertimed.API.UserSession;
@@ -150,6 +154,26 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
+
+    public void GetLogin2(String Email,String Password){
+        AndroidNetworking.post("http://chessmafia.com/php/Avertimed/api/login")
+                .addBodyParameter("Email",Email)
+                .addBodyParameter("Password",Password)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response", response + " null");
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.e("Response", anError.getErrorBody() + " null");
+                    }
+                });
+    }
     public void GetLogin(String Email,String Password) {
 
         final KProgressHUD progressDialog = KProgressHUD.create(Login_Activity.this)
@@ -208,6 +232,8 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }
@@ -467,6 +493,8 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }
@@ -482,5 +510,16 @@ public class Login_Activity extends AppCompatActivity {
         else if(mCallbackManager!=null)
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    @Override
+    protected void onStart() {
+
+        if(session.isLoggedIn()){
+            Intent intent = new Intent(Login_Activity.this,ProductActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        super.onStart();
     }
 }

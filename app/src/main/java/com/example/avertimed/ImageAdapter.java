@@ -29,11 +29,9 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override  
     public Object instantiateItem(ViewGroup container, int position) {
-        ImageView imageView = new ImageView(mContext);  
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
+        ImageView imageView = new ImageView(mContext);
+        imageView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
         Glide.with(imageView.getContext()).load(McategoryModels.get(position).getCat_name_image()).into(imageView);
-
         ((ViewPager) container).addView(imageView, 0);
         return imageView;  
     }  

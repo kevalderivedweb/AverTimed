@@ -19,7 +19,7 @@ public class SetShippingAddressRequest extends StringRequest {
         super(Method.POST, ServerUtils.BASE_URL+"update-shipping-address", listener, null);
 
         parameters = new HashMap<>();
-        parameters.put("FirstName ", name );
+        parameters.put("FirstName", name );
         parameters.put("LastName", last);
         parameters.put("ShippingAddress", ad1);
         parameters.put("ShippingCity", ad2);

@@ -1,5 +1,6 @@
 package com.example.avertimed;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +25,10 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.example.avertimed.API.CancelOrderRequest;
 import com.example.avertimed.API.GetCurrentOrderRequest;
 import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.CurrentProductAdapter;
-import com.example.avertimed.Adapter.SubProductAdapter;
 import com.example.avertimed.Model.OrderModel;
 import com.example.avertimed.Model.Product;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -39,15 +40,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ManageOrderActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private UserSession session;
     private ArrayList<OrderModel> orderModels =  new ArrayList<>();
-    private ArrayList<Product> ProductModels =  new ArrayList<>();
+
     private CurrentProductAdapter mAdapter;
     private RecyclerView category_view;
+    private String Order = "0";
+    private LinearLayout LN_STATUS;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,10 +66,31 @@ public class ManageOrderActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(ManageOrderActivity.this);//Creating the RequestQueue
         session = new UserSession(getApplicationContext());
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(bundle != null){
+            Order =(bundle.getString("Order"));
+        }
+
         category_view = findViewById(R.id.category_view);
-        mAdapter = new CurrentProductAdapter(orderModels, new CurrentProductAdapter.OnItemClickListener() {
+        LN_STATUS = findViewById(R.id.status);
+        mAdapter = new CurrentProductAdapter(ManageOrderActivity.this,orderModels, new CurrentProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
+
+                if(Objects.requireNonNull(Order).equals("1")){
+                    CancelOrder(orderModels.get(item).getUserOrderID(),item);
+                }
+
+            }
+
+            @Override
+            public void onItemClickSUB(int position, int item) {
+                int Id = Integer.parseInt(orderModels.get(position).getProducts().get(item).getProductID());
+                Intent intent = new Intent(ManageOrderActivity.this, GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",Id);
+                startActivity(intent);
 
             }
         });
@@ -78,6 +103,17 @@ public class ManageOrderActivity extends AppCompatActivity {
        final LinearLayout past = findViewById(R.id.past);
        final TextView txtcurrent = findViewById(R.id.txt_current);
        final TextView txtpast = findViewById(R.id.txt_past);
+
+
+
+
+
+        if(Objects.requireNonNull(Order).equals("1")){
+            LN_STATUS.setVisibility(View.GONE);
+            GetAddress("manage-orders");
+        }else {
+            GetAddress("get-current-orders");
+        }
 
        current.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -108,7 +144,7 @@ public class ManageOrderActivity extends AppCompatActivity {
             }
         });
 
-        GetAddress("get-current-orders");
+
     }
 
     private void GetAddress(String MethodName)  {
@@ -122,13 +158,12 @@ public class ManageOrderActivity extends AppCompatActivity {
                 .show();
 
         GetCurrentOrderRequest loginRequest = new GetCurrentOrderRequest(MethodName,new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
                 progressDialog.dismiss();
                 orderModels.clear();
-                ProductModels.clear();
-
 
                 JSONObject jsonObject = null;
                 try {
@@ -147,9 +182,15 @@ public class ManageOrderActivity extends AppCompatActivity {
                         orderModel.setShippingCharge(String.valueOf(object1.getInt("ShippingCharge")));
                         orderModel.setTotalAmount(String.valueOf(object1.getInt("TotalAmount")));
                         orderModel.setShippingCharge(object1.getString("ShippingCharge"));
-                        orderModel.setOrderStatus(object1.getString("UserOrderID"));
-                        orderModel.setDate(object1.getString("date"));
 
+                        if(Objects.requireNonNull(Order).equals("1")){
+                            orderModel.setOrderStatus("Cancel");
+                        }else {
+                            orderModel.setOrderStatus(object1.getString("OrderStatus"));
+                        }
+
+                        orderModel.setDate(object1.getString("date"));
+                        ArrayList<Product> ProductModels =  new ArrayList<>();
                         JSONArray products = object.getJSONObject(i).getJSONArray("products");
                         for (int j= 0 ; j < products.length();j++){
                             JSONObject products_details = products.getJSONObject(j);
@@ -198,8 +239,68 @@ public class ManageOrderActivity extends AppCompatActivity {
             return params;
         }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }
+
+    private void CancelOrder(String OrderId, final int pos)  {
+
+        final KProgressHUD progressDialog = KProgressHUD.create(ManageOrderActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+
+        CancelOrderRequest loginRequest = new CancelOrderRequest(OrderId,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response", response + " null");
+                progressDialog.dismiss();
+
+
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    orderModels.remove(pos);
+                    mAdapter.notifyDataSetChanged();
+                    Toast.makeText(ManageOrderActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+
+                }catch (Exception e){
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                if (error instanceof ServerError)
+                    Toast.makeText(ManageOrderActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                else if (error instanceof TimeoutError)
+                    Toast.makeText(ManageOrderActivity.this, "Connection Timed Out", Toast.LENGTH_SHORT).show();
+                else if (error instanceof NetworkError)
+                    Toast.makeText(ManageOrderActivity.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                // params.put("Accept", "application/json");
+                params.put("Authorization","Bearer "+ session.getAPIToken());
+                return params;
+            }};
+        loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
+        requestQueue.add(loginRequest);
+
+    }
+
 
 }

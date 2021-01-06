@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,8 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +28,17 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.avertimed.API.LoginRequest;
 import com.example.avertimed.API.RegistrationRequest;
+import com.example.avertimed.API.ServerUtils;
 import com.example.avertimed.API.UserSession;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +52,8 @@ public class SignUp_Activity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private RequestQueue requestQueue;
     private UserSession session;
+    private int mCurencyPos = 1;
+    private Spinner mCity;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -74,7 +87,7 @@ public class SignUp_Activity extends AppCompatActivity {
         m_done = findViewById(R.id.m_done);
         img2 = findViewById(R.id.img2);
         img1 = findViewById(R.id.img1);
-
+        mCity = (Spinner) findViewById(R.id.city);
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +122,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 }else if(!Password_1.getText().toString().equals(Password_2.getText().toString())){
                     Toast.makeText(getApplicationContext(),"Enter Valid Password",Toast.LENGTH_SHORT).show();
                 }else {
-                    GetRegistration(FirstName.getText().toString(),LastName.getText().toString(),Email.getText().toString(),Password_1.getText().toString(),Password_2.getText().toString());
+                    GetRegistration(FirstName.getText().toString(),LastName.getText().toString(),Email.getText().toString(),Password_1.getText().toString(),Password_2.getText().toString(), String.valueOf(mCurencyPos));
                 }
             }
         });
@@ -121,11 +134,14 @@ public class SignUp_Activity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        GetCity();
     }
 
-    private void GetRegistration(String FirstName, String Lastname, String Email, String Password, String Password2) {
+    private void GetRegistration(String FirstName, String Lastname, String Email, String Password, String Password2,String currency) {
 
 
+        Log.e("currency",currency);
         final KProgressHUD progressDialog = KProgressHUD.create(SignUp_Activity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -134,7 +150,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-        RegistrationRequest loginRequest = new RegistrationRequest(FirstName,Lastname,Email,Password,Password2, new Response.Listener<String>() {
+        RegistrationRequest loginRequest = new RegistrationRequest(FirstName,Lastname,Email,Password,Password2,currency, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
@@ -182,8 +198,86 @@ public class SignUp_Activity extends AppCompatActivity {
             }
         });
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
 
     }
+
+    public void GetCity(){
+        final KProgressHUD progressDialog = KProgressHUD.create(SignUp_Activity.this)
+                .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
+
+        progressDialog.show();
+        AndroidNetworking.get(ServerUtils.BASE_URL+"get-currency")
+                .addHeaders("Accept","application/json")
+                .setTag("Feed")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response : ", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getInt("ResponseCode")==200) {
+
+                                try {
+
+                                    JSONArray jsonObject1 = jsonObject.getJSONArray("data");
+
+                                    String[] City = new String[jsonObject1.length()];
+
+                                    for (int i = 0; i < jsonObject1.length(); i++) {
+                                        JSONObject object = jsonObject1.getJSONObject(i);
+                                        City[i] =  object.getString("Currency");
+                                    }
+
+
+
+                                    ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(SignUp_Activity.this,
+                                            android.R.layout.simple_spinner_item, City);
+                                    mCity.setAdapter(adapter_age);
+                                    mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                                   int position, long id) {
+                                            Log.e("currency",""+position);
+                                            mCurencyPos = position+1;
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else {
+
+                                Toast.makeText(SignUp_Activity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Toast.makeText(SignUp_Activity.this,"Unauthenticated",Toast.LENGTH_SHORT).show();}
+                });
+
+    }
+
 }

@@ -92,9 +92,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/sky_blue"
                 android:text="Edit"
+                android:visibility="visible"
                 android:layout_weight="1.7"
                 android:layout_gravity="center"
                 android:gravity="start"
+                android:id="@+id/edit"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginLeft="10dp" />
@@ -108,6 +110,7 @@
             android:textColor="@color/black"
             android:text="144 Ortiz Plains Suite 344 \nNew york, \nUnited States"
             android:gravity="start"
+            android:id="@+id/address"
             android:textSize="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -117,1176 +120,12 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="ABC Shop Name Co, Ltd."
-            android:layout_gravity="center"
-            android:gravity="start"
-            android:layout_weight="0.3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.6">
-                <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="90dp"
-                    android:gravity="center"
-                    android:background="@color/light_blue">
-
-
-                    <ImageView
-                       
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/product_2"/>
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="0.7">
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                    android:textSize="16dp"
-                    android:textStyle="normal"
-                    android:layout_marginLeft="30dp"
-                    android:textColor="@color/black"
-                    />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$50"
-                    android:textSize="15dp"
-                    android:textStyle="normal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:textColor="@color/colorPrimary"
-                    />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Min 20 Pieces"
-                        android:textSize="12dp"
-                        android:textStyle="normal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/gray"
-                        />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:weightSum="3"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:id="@+id/minus_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.25"
-                        android:src="@drawable/minus_bg"/>
-
-
-                    <EditText
-                        android:id="@+id/edt_qt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="20"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:background="@drawable/placeorder_bg_qt"
-                        android:layout_weight="0.7"
-                        android:textSize="14dp"
-                        android:textColor="#282828"
-                        android:singleLine="true" />
-
-                    <ImageView
-                        android:id="@+id/plus_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.25"
-                        android:layout_gravity="center"
-                        android:src="@drawable/plus_bg"/>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-    <LinearLayout
-        
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray"
-        android:weightSum="2">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Subtotal"
-            android:textSize="16dp"
-            android:layout_weight="0.5"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="normal"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/black"
-            />
-
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="$1000"
-            android:textSize="16dp"
-            android:layout_weight="1.5"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="normal"
-            android:layout_gravity="center"
-            android:gravity="end"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorPrimary"
-            />
-
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ABC Shop Name Co, Ltd."
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6">
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="90dp"
-                        android:gravity="center"
-                        android:background="@color/light_blue">
-
-
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/product_2"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.7">
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                        android:textSize="16dp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/black"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$8799"
-                            android:textSize="15dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/colorPrimary"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Min 20 Pieces"
-                            android:textSize="12dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/gray"
-                            />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.25"
-                            android:src="@drawable/minus_bg"/>
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text=""
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@drawable/placeorder_bg_qt"
-                            android:layout_weight="0.7"
-                            android:textSize="14dp"
-                            android:textColor="#282828"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:layout_gravity="center"
-                            android:src="@drawable/plus_bg"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/gray"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$580.00"
-                android:textSize="16dp"
-                android:layout_weight="1.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ABC Shop Name Co, Ltd."
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6">
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="90dp"
-                        android:gravity="center"
-                        android:background="@color/light_blue">
-
-
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/product_2"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.7">
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                        android:textSize="16dp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/black"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$8799"
-                            android:textSize="15dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/colorPrimary"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Min 20 Pieces"
-                            android:textSize="12dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/gray"
-                            />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.25"
-                            android:src="@drawable/minus_bg"/>
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text=""
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@drawable/placeorder_bg_qt"
-                            android:layout_weight="0.7"
-                            android:textSize="14dp"
-                            android:textColor="#282828"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:layout_gravity="center"
-                            android:src="@drawable/plus_bg"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/gray"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$580.00"
-                android:textSize="16dp"
-                android:layout_weight="1.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ABC Shop Name Co, Ltd."
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6">
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="90dp"
-                        android:gravity="center"
-                        android:background="@color/light_blue">
-
-
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/product_2"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.7">
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                        android:textSize="16dp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/black"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$8799"
-                            android:textSize="15dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/colorPrimary"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Min 20 Pieces"
-                            android:textSize="12dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/gray"
-                            />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.25"
-                            android:src="@drawable/minus_bg"/>
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text=""
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@drawable/placeorder_bg_qt"
-                            android:layout_weight="0.7"
-                            android:textSize="14dp"
-                            android:textColor="#282828"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:layout_gravity="center"
-                            android:src="@drawable/plus_bg"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/gray"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$580.00"
-                android:textSize="16dp"
-                android:layout_weight="1.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ABC Shop Name Co, Ltd."
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6">
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="90dp"
-                        android:gravity="center"
-                        android:background="@color/light_blue">
-
-
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/product_2"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.7">
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                        android:textSize="16dp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/black"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$8799"
-                            android:textSize="15dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/colorPrimary"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Min 20 Pieces"
-                            android:textSize="12dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/gray"
-                            />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.25"
-                            android:src="@drawable/minus_bg"/>
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text=""
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@drawable/placeorder_bg_qt"
-                            android:layout_weight="0.7"
-                            android:textSize="14dp"
-                            android:textColor="#282828"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:layout_gravity="center"
-                            android:src="@drawable/plus_bg"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/gray"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$580.00"
-                android:textSize="16dp"
-                android:layout_weight="1.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ABC Shop Name Co, Ltd."
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6">
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="90dp"
-                        android:gravity="center"
-                        android:background="@color/light_blue">
-
-
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/product_2"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.7">
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Medical thermometer/ \nElectronic/ infrared/ Forehead"
-                        android:textSize="16dp"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="@color/black"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$8799"
-                            android:textSize="15dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/colorPrimary"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Min 20 Pieces"
-                            android:textSize="12dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="30dp"
-                            android:textColor="@color/gray"
-                            />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
-                        <ImageView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.25"
-                            android:src="@drawable/minus_bg"/>
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text=""
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@drawable/placeorder_bg_qt"
-                            android:layout_weight="0.7"
-                            android:textSize="14dp"
-                            android:textColor="#282828"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:layout_gravity="center"
-                            android:src="@drawable/plus_bg"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/gray"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$580.00"
-                android:textSize="16dp"
-                android:layout_weight="1.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="normal"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
-                />
-
-
-        </LinearLayout>
+            android:id="@+id/category_view"
+            android:layout_below="@+id/one"
+            android:layout_above="@+id/order"
+            android:layout_height="wrap_content"/>
 
 
 
@@ -1335,7 +174,47 @@
 
     </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/coupon_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Coupon Code"
+                    android:textSize="16dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/apply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:textSize="16dp"
+                    android:visibility="visible"
+                    android:layout_weight="1.5"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2">
@@ -1343,7 +222,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Product Price"
+                android:text="Sub Total"
                 android:textSize="14dp"
                 android:layout_weight="0.5"
                 android:layout_marginTop="10dp"
@@ -1358,6 +237,7 @@
                 android:layout_height="wrap_content"
                 android:text="$580.00"
                 android:textSize="16dp"
+                android:id="@+id/product_price"
                 android:layout_weight="1.5"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -1404,6 +284,7 @@
                 android:layout_weight="1.5"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/shipping_coast"
                 android:textStyle="normal"
                 android:layout_gravity="center"
                 android:gravity="end"
@@ -1415,68 +296,49 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
             <LinearLayout
+                android:id="@+id/discoundln"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:visibility="gone"
+                android:weightSum="2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:layout_weight="0.6"
+                    android:text="Discount"
+                    android:textSize="14dp"
+                    android:layout_weight="0.5"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     />
-
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Via DHL Express"
-                    android:textSize="12dp"
-                    android:layout_weight="1.1"
-                    android:layout_gravity="center"
+                    android:text="$32.50"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/discount"
                     android:textStyle="normal"
-                    android:textColor="@color/black"
-                    />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
                     android:layout_gravity="center"
+                    android:gravity="end"
+                    android:layout_marginRight="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="1.3"
-                    android:src="@drawable/right_arrow"/>
+                    android:textColor="@color/colorPrimary"
+                    />
 
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ships out within 3-5 Days "
-                android:layout_marginBottom="10dp"
-                android:textSize="12dp"
-                android:textStyle="normal"
-                android:gravity="right"
-                android:layout_marginRight="40dp"
-                android:textColor="@color/gray"
-                />
-        </LinearLayout>
 
-        <View
+
+            <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray"
@@ -1745,6 +607,7 @@
             android:textStyle="normal"
             android:layout_gravity="center"
             android:gravity="end"
+            android:id="@+id/total"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/colorPrimary"

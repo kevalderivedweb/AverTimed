@@ -1,30 +1,27 @@
 package com.example.avertimed.Adapter;
 
-import android.content.Intent;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.avertimed.AllCategories;
-import com.example.avertimed.Model.CategoryModel;
 import com.example.avertimed.Model.OrderModel;
 import com.example.avertimed.R;
-import com.example.avertimed.SubCategories;
 
 import java.util.ArrayList;
 
 public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAdapter.MyViewHolder> {
 
     private final OnItemClickListener listener;
+    private final Context mContext;
     private ArrayList<OrderModel> mDataset;
     private SubProductAdapter mAdapter;
+    private int Pos = 0;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -32,7 +29,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         // each data item is just a string in this case
-        public TextView order_num,price,date;
+        public TextView order_num,price,date,cancel;
         RecyclerView category_view;
 
 
@@ -41,15 +38,17 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
             this.order_num = (TextView) itemView.findViewById(R.id.order_num);
             this.price = (TextView) itemView.findViewById(R.id.price);
             this.date = (TextView) itemView.findViewById(R.id.date);
+            this.cancel = (TextView) itemView.findViewById(R.id.cancel);
             category_view =(RecyclerView) itemView.findViewById(R.id.category_view);
         }
 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CurrentProductAdapter(ArrayList<OrderModel> categoryModels, OnItemClickListener listener) {
+    public CurrentProductAdapter(Context ProductContext, ArrayList<OrderModel> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
+        this.mContext = ProductContext;
     }
 
     // Create new views (invoked by the layout manager)
@@ -67,25 +66,33 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
-        holder.order_num.setText("Order No "+mDataset.get(position).getUserOrderID());
+
+        Pos = position;
+        holder.order_num.setText("Order Code : "+mDataset.get(position).getOrderCode());
         holder.price.setText("$ "+mDataset.get(position).getTotalAmount());
         holder.date.setText(mDataset.get(position).getDate());
+        holder.cancel.setText(mDataset.get(position).getOrderStatus());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClick(position);
+                listener.onItemClick(Pos);
             }
         });
 
 
+        Log.e("POS",mDataset.get(Pos).getProducts().get(0).getProductID());
+
         mAdapter = new SubProductAdapter(mDataset.get(position).getProducts(), new SubProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
+
+                listener.onItemClickSUB(position,item);
+
 
             }
         });
@@ -108,6 +115,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
 
     public interface OnItemClickListener {
         void onItemClick(int item);
+        void onItemClickSUB(int position, int item);
     }
 
 

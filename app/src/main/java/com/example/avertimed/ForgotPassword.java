@@ -116,6 +116,8 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
     }
 }

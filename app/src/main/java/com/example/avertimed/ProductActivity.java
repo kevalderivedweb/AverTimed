@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,6 +45,8 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 
 public class ProductActivity extends AppCompatActivity {
@@ -109,7 +112,7 @@ public class ProductActivity extends AppCompatActivity {
         findViewById(R.id.cart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(ProductActivity.this,PlaceOrder.class);
+                Intent i  = new Intent(ProductActivity.this,ViewCart.class);
                 startActivity(i);
             }
         });
@@ -117,8 +120,8 @@ public class ProductActivity extends AppCompatActivity {
         ln_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(ProductActivity.this,MessageUserList.class);
-                startActivity(i);
+             /*   Intent i  = new Intent(ProductActivity.this,MessageUserList.class);
+                startActivity(i);*/
             }
         });
 
@@ -127,8 +130,8 @@ public class ProductActivity extends AppCompatActivity {
         findViewById(R.id.msg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(ProductActivity.this,MessageUserList.class);
-                startActivity(i);
+               /* Intent i  = new Intent(ProductActivity.this,MessageUserList.class);
+                startActivity(i);*/
             }
         });
 
@@ -165,6 +168,9 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int item) {
 
+                Intent intent = new Intent(ProductActivity.this,GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",categoryModels_NewProduct.get(item).getCat_id());
+                startActivity(intent);
             }
         });
         new_product.setAdapter(New_Product_mAdapter);
@@ -172,7 +178,10 @@ public class ProductActivity extends AppCompatActivity {
         mAdapter = new SugestAdapter(categoryModels_Cat, new SugestAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
-
+                Intent i = new Intent(ProductActivity.this, SubCategories.class);
+                Log.e("Category_id",""+categoryModels_Cat.get(item).getCat_id());
+                i.putExtra("Category_id", categoryModels_Cat.get(item).getCat_id());
+                startActivity(i);
             }
         });
         c_rvreq.setHasFixedSize(true);
@@ -183,7 +192,9 @@ public class ProductActivity extends AppCompatActivity {
         mAdapter_2 = new SugestAdapter2(categoryModels_TopTrend,new SugestAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
-
+                Intent intent = new Intent(ProductActivity.this,GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",categoryModels_TopTrend.get(item).getCat_id());
+                startActivity(intent);
             }
         });
         t_rvreq.setHasFixedSize(true);
@@ -396,8 +407,16 @@ public class ProductActivity extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(ProductActivity.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("Accept", "application/json");
+            params.put("Authorization","Bearer "+ userSession.getAPIToken());
+            return params;
+        }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

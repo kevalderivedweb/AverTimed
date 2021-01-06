@@ -66,6 +66,11 @@ public class UserSession {
     public static final String KEY_CART = "cartvalue";
     public static final String KEY_PINCODE = "KEY_PINCODE";
     public static final String KEY_ADDRESS = "KEY_ADDRESS";
+    public static final String KEY_P_COUNTRY = "KEY_P_COUNTRY";
+    public static final String KEY_P_STATE = "KEY_P_STATE";
+    public static final String KEY_P_CITY = "KEY_P_CITY";
+    public static final String KEY_P_ADDRESS = "KEY_P_ADDRESS";
+    public static final String KEY_P_MOBILE= "KEY_P_MOBILE";
 
     // number of items in our wishlist
     public static final String KEY_WISHLIST = "wishlistvalue";
@@ -128,6 +133,33 @@ public class UserSession {
         editor.commit();
     }
 
+
+    public void createProfileSession(String Country, String State, String City, String Address, String Mobile) {
+        // Storing login value as TRUE
+
+        // Storing name in pref
+        editor.putString(KEY_P_COUNTRY, Country);
+
+        editor.putString(KEY_P_STATE, State);
+        editor.putString(KEY_P_CITY, City);
+        editor.putString(KEY_P_ADDRESS, Address);
+        editor.putString(KEY_P_MOBILE, Mobile);
+
+
+        // Storing email in pref
+
+        // Storing phone number in pref
+        //   editor.putString(KEY_MOBiLE, mobile);
+
+        // Storing image url in pref
+        //   editor.putString(KEY_PHOTO, photo);
+        //    editor.putString(KEY_PARENT_PHOTO, photo);
+        //  editor.putString(KEY_PARENT_MOBiLE, mobile);
+        //  editor.putString(KEY_PARENT_USER_ID, user_id);
+        //   editor.putString(KEY_SELECTED_USER_ID, user_id);
+        // commit changes
+        editor.commit();
+    }
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page
@@ -212,7 +244,25 @@ public class UserSession {
         return pref.getString(KEY_PHOTO, "");
     }
 
+    public String getProfileCountry() {
+        return pref.getString(KEY_P_COUNTRY, "");
+    }
 
+    public String getProfileState() {
+        return pref.getString(KEY_P_STATE, "");
+    }
+
+    public String getProfileCity() {
+        return pref.getString(KEY_P_CITY, "");
+    }
+
+    public String getProfileAddress() {
+        return pref.getString(KEY_P_ADDRESS, "");
+    }
+
+    public String getProfileMobile() {
+        return pref.getString(KEY_P_MOBILE, "");
+    }
     public void setFirstTime() {
         pref.edit().putBoolean("FIRST_TIME", true).commit();
     }

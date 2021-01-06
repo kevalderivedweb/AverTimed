@@ -16,7 +16,7 @@ public class RequestForQTRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public RequestForQTRequest(String Name, String Email, String PhoneNo,String CategoryId,String Message,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+    public RequestForQTRequest(String Name, String Email, String PhoneNo,String QT,String Message,String CategoryID,String SubCategoryId,Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(Method.POST, ServerUtils.BASE_URL+"request-for-quotation", listener, null);
         parameters = new HashMap<>();
        // parameters.put("OldPassword ", OldPassword );
@@ -25,7 +25,7 @@ public class RequestForQTRequest extends StringRequest {
         parameters.put("PhoneNo", PhoneNo);
         parameters.put("CategoryID", "1");
         parameters.put("SubCategoryID", "1");
-        parameters.put("Quantity", CategoryId);
+        parameters.put("Quantity", QT);
         parameters.put("Message", Message);
     }
 

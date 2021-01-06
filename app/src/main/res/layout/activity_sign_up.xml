@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
@@ -151,7 +151,7 @@
                 android:background="@drawable/edit_bg"
                 android:hint="Input your first name"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
 
@@ -176,7 +176,7 @@
                 android:background="@drawable/edit_bg"
                 android:hint="Input your last name"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
 
@@ -202,7 +202,7 @@
                 
                 android:hint="input your email address"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
 
@@ -239,7 +239,7 @@
                 android:background="@drawable/edit_bg"
                 android:hint="input your password"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"/>
             </com.google.android.material.textfield.TextInputLayout>
 -->
@@ -255,7 +255,7 @@
                 android:hint="input your password"
                 
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
 
@@ -291,7 +291,7 @@
                     android:background="@drawable/edit_bg"
                     android:hint="Re-enter your password"
                     android:maxLines="1"
-                    android:textSize="48px"
+                    android:textSize="18dp"
                     android:textColor="#282828"/>
             </com.google.android.material.textfield.TextInputLayout>
 -->
@@ -308,9 +308,30 @@
                 android:maxLines="1"
                 
                 android:inputType="textPassword"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginLeft="10dp"
+                android:text="Currency"
+                android:textColor="@color/gray"
+                android:textSize="15dp" />
+
+
+
+            <Spinner
+                android:id="@+id/city"
+                android:background="@drawable/spinnerstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
 
 
             <ImageView
@@ -345,4 +366,4 @@
     </ScrollView>
 
 
-</RelativeLayout>
+</LinearLayout>

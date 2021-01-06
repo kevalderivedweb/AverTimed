@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.avertimed.API.CategoryRequest;
 import com.example.avertimed.API.HomeRequest;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.CategoryAdapter;
 import com.example.avertimed.Model.CategoryModel;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -35,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AllTopTrends extends AppCompatActivity {
 
@@ -43,6 +47,7 @@ public class AllTopTrends extends AppCompatActivity {
     private RecyclerView category_view;
     private SugestAdapter2 mAdapter;
     private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+    private UserSession session;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -63,12 +68,14 @@ public class AllTopTrends extends AppCompatActivity {
             }
         });
 
-
+        session = new UserSession(getApplicationContext());
         category_view = findViewById(R.id.category_view);
         mAdapter = new SugestAdapter2(categoryModels, new SugestAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
-
+                Intent intent = new Intent(AllTopTrends.this,GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",categoryModels.get(item).getCat_id());
+                startActivity(intent);
             }
         });
         category_view.setHasFixedSize(true);
@@ -146,8 +153,16 @@ public class AllTopTrends extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(AllTopTrends.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("Accept", "application/json");
+            params.put("Authorization","Bearer "+ session.getAPIToken());
+            return params;
+        }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

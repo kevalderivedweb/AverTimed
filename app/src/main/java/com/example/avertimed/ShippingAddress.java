@@ -106,7 +106,7 @@ public class ShippingAddress extends AppCompatActivity {
     }
 
     private void SetAddress(String name, String last, String ad1, String ad2, String state, String contry, String pin) {
-        final KProgressHUD progressDialog = KProgressHUD.create(ShippingAddress.this)
+       /* final KProgressHUD progressDialog = KProgressHUD.create(ShippingAddress.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
                 .setCancellable(false)
@@ -114,9 +114,8 @@ public class ShippingAddress extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-        AndroidNetworking.post("http://chessmafia.com/php/avertimed/api/update-shipping-address")
+        AndroidNetworking.post("http://chessmafia.com/php/Avertimed/api/update-shipping-address")
                 .addBodyParameter("FirstName",name)
-                .addBodyParameter("ShippingAddressID","1")
                 .addBodyParameter("LastName", last)
                 .addBodyParameter("ShippingAddress",ad1 )
                 .addBodyParameter("ShippingCity", ad2)
@@ -138,11 +137,11 @@ public class ShippingAddress extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        Log.e("Response", anError.getErrorDetail() + " null");
+                        Log.e("Response", anError.getErrorBody() + " null");
                     }
-                });
+                });*/
 
-       /* final KProgressHUD progressDialog = KProgressHUD.create(ShippingAddress.this)
+        final KProgressHUD progressDialog = KProgressHUD.create(ShippingAddress.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
                 .setCancellable(false)
@@ -181,13 +180,15 @@ public class ShippingAddress extends AppCompatActivity {
         }){@Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             Map<String, String> params = new HashMap<String, String>();
-             params.put("Accept", "application/json");
+            params.put("Accept", "application/json");
             Log.e("Authorization",session.getAPIToken());
             params.put("Authorization","Bearer "+ session.getAPIToken());
             return params;
         }};
         loginRequest1.setTag("TAG1");
-        requestQueue.add(loginRequest1);*/
+        loginRequest1.setShouldCache(false);
+
+        requestQueue.add(loginRequest1);
     }
 
 
@@ -249,6 +250,8 @@ public class ShippingAddress extends AppCompatActivity {
             return params;
         }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

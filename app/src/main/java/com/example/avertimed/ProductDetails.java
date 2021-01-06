@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.avertimed.API.ProductBySubCategoryRequest;
 import com.example.avertimed.API.ProductRequest;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.NewProductAdapter;
 import com.example.avertimed.Adapter.NewProductAdapter2;
 import com.example.avertimed.Model.CategoryModel;
@@ -35,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
 
@@ -44,6 +48,7 @@ public class ProductDetails extends AppCompatActivity {
     private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
     private int Category_id;
     private TextView total_product;
+    private UserSession userSession;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -55,13 +60,14 @@ public class ProductDetails extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
         requestQueue = Volley.newRequestQueue(ProductDetails.this);//Creating the RequestQueue
-
+        userSession = new UserSession(getApplicationContext());
         category_view = findViewById(R.id.category_view);
         total_product = findViewById(R.id.total_product);
         mAdapter = new NewProductAdapter2(categoryModels, new NewProductAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
                 Intent intent = new Intent(ProductDetails.this,GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",categoryModels.get(item).getCat_id());
                 startActivity(intent);
             }
         });
@@ -147,8 +153,15 @@ public class ProductDetails extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(ProductDetails.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        });
-        loginRequest.setTag("TAG");
+        }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("Accept", "application/json");
+            params.put("Authorization","Bearer "+ userSession.getAPIToken());
+            return params;
+        }};        loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }

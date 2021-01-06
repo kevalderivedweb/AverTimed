@@ -130,16 +130,14 @@
                 android:textStyle="normal"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp" />
-            <EditText
+
+            <Spinner
                 android:id="@+id/category"
+                android:background="@drawable/spinnerstyle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your Product Category"
-                android:background="@drawable/edit_bg_3"
-                android:layout_marginTop="5dp"
-                android:textSize="14dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -152,16 +150,14 @@
                 android:textStyle="normal"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp" />
-            <EditText
-                android:id="@+id/category1"
+
+            <Spinner
+                android:id="@+id/subcategory"
+                android:background="@drawable/spinnerstyle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Your Sub Category"
-                android:background="@drawable/edit_bg_3"
-                android:layout_marginTop="5dp"
-                android:textSize="14dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"

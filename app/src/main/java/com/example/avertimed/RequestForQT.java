@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -24,11 +27,18 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.avertimed.API.ChangePasswordRequest;
 import com.example.avertimed.API.RequestForQTRequest;
+import com.example.avertimed.API.ServerUtils;
 import com.example.avertimed.API.UserSession;
+import com.example.avertimed.Model.CategoryModel;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +53,10 @@ public class RequestForQT extends AppCompatActivity {
     private int quantity;
     private UserSession session;
     private RequestQueue requestQueue;
-    private EditText firstname,email,number,category,category1,msg;
+    private EditText firstname,email,number,msg;
+    private Spinner category,subcategory;
+    private String SUBCATEGORYNAME;
+    private String CATEGORYNAME;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -89,9 +102,9 @@ public class RequestForQT extends AppCompatActivity {
         email = findViewById(R.id.email);
         number = findViewById(R.id.number);
         category = findViewById(R.id.category);
-        category1 = findViewById(R.id.category1);
+        subcategory = findViewById(R.id.subcategory);
         msg = findViewById(R.id.msg);
-
+        GetCategory();
         findViewById(R.id.place_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,10 +114,6 @@ public class RequestForQT extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter Email",Toast.LENGTH_SHORT).show();
                 }else  if(number.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(),"Enter number",Toast.LENGTH_SHORT).show();
-                }else  if(category.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(),"Enter Category",Toast.LENGTH_SHORT).show();
-                }else  if(category1.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(),"Enter category",Toast.LENGTH_SHORT).show();
                 }else  if(msg.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(),"Enter message",Toast.LENGTH_SHORT).show();
                 }else {
@@ -131,7 +140,7 @@ public class RequestForQT extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-        RequestForQTRequest loginRequest = new RequestForQTRequest(Firstname,Email,number,qt,msg, new Response.Listener<String>() {
+        RequestForQTRequest loginRequest = new RequestForQTRequest(Firstname,Email,number,qt,msg, CATEGORYNAME,SUBCATEGORYNAME,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
@@ -161,11 +170,13 @@ public class RequestForQT extends AppCompatActivity {
         }){@Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             Map<String, String> params = new HashMap<String, String>();
-            // params.put("Accept", "application/json");
+             params.put("Accept", "application/json");
             params.put("Authorization","Bearer "+ session.getAPIToken());
             return params;
         }};
         loginRequest.setTag("TAG");
+        loginRequest.setShouldCache(false);
+
         requestQueue.add(loginRequest);
 
     }
@@ -184,5 +195,163 @@ public class RequestForQT extends AppCompatActivity {
             edt_qt.setText(String.valueOf(quantity));
         }
     }
+
+    public void GetCategory(){
+        final KProgressHUD progressDialog = KProgressHUD.create(RequestForQT.this)
+                .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
+
+        progressDialog.show();
+        AndroidNetworking.get(ServerUtils.BASE_URL+"get-categories")
+                .addHeaders("Accept","application/json")
+                .addHeaders("Authorization","Bearer "+ session.getAPIToken())
+                .setTag("Feed")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response : ", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getInt("ResponseCode")==200) {
+
+                                try {
+
+                                    JSONArray jsonObject1 = jsonObject.getJSONArray("data");
+
+                                    final String[] City = new String[jsonObject1.length()];
+                                    final String[] CityId = new String[jsonObject1.length()];
+
+                                    for (int i = 0; i < jsonObject1.length(); i++) {
+                                        JSONObject object = jsonObject1.getJSONObject(i);
+                                        City[i] =  object.getString("CategoryNameEn");
+                                        CityId[i] =  object.getString("CategoryID");
+                                    }
+
+                                    ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(RequestForQT.this,
+                                            android.R.layout.simple_spinner_item, City);
+                                    category.setAdapter(adapter_age);
+                                    category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                                   int position, long id) {
+                                            Log.e("currency",""+position);
+
+                                            CATEGORYNAME = CityId[position];
+                                            GetSubCategory(CityId[position]);
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else {
+
+                                Toast.makeText(RequestForQT.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Toast.makeText(RequestForQT.this,"Unauthenticated",Toast.LENGTH_SHORT).show();}
+                });
+
+    }
+
+    public void GetSubCategory(String CategoryID){
+        final KProgressHUD progressDialog = KProgressHUD.create(RequestForQT.this)
+                .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
+
+        progressDialog.show();
+        AndroidNetworking.get(ServerUtils.BASE_URL+"get-sub-categories?CategoryID="+CategoryID)
+                .addHeaders("Accept","application/json")
+                .addHeaders("Authorization","Bearer "+ session.getAPIToken())
+                .setTag("Feed")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response : ", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getInt("ResponseCode")==200) {
+
+                                try {
+
+                                    JSONArray jsonObject1 = jsonObject.getJSONArray("data");
+
+                                    final String[] City = new String[jsonObject1.length()];
+                                    final String[] CityId = new String[jsonObject1.length()];
+
+                                    for (int i = 0; i < jsonObject1.length(); i++) {
+                                        JSONObject object = jsonObject1.getJSONObject(i);
+                                        City[i] =  object.getString("SubCategoryNameEn");
+                                        CityId[i] =  object.getString("SubCategoryID");
+                                    }
+
+                                    ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(RequestForQT.this,
+                                            android.R.layout.simple_spinner_item, City);
+                                    subcategory.setAdapter(adapter_age);
+                                    subcategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                                   int position, long id) {
+                                            Log.e("currency",""+position);
+
+                                            SUBCATEGORYNAME = CityId[position];
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else {
+
+                                Toast.makeText(RequestForQT.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Toast.makeText(RequestForQT.this,"Unauthenticated",Toast.LENGTH_SHORT).show();}
+                });
+
+    }
+
+
 
 }

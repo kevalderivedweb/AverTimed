@@ -64,7 +64,7 @@ public class SugestAdapter2 extends RecyclerView.Adapter<SugestAdapter2.MyViewHo
         holder.textView.setText(mCategory.get(position).getCat_name_en());
         holder.txt_price.setText(mCategory.get(position).getTxt_price());
         Glide.with(holder.img.getContext()).load(mCategory.get(position).getCat_name_image()).into(holder.img);
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onItemClick(position);

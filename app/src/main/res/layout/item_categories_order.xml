@@ -67,16 +67,6 @@
                 android:layout_gravity="center"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="New York, United States"
-                android:textSize="13dp"
-                android:textColor="@color/text_color"
-                android:textStyle="bold"
-                android:layout_margin="2dp"
-                android:layout_gravity="center"
-                />
 
 
         </LinearLayout>
@@ -114,19 +104,6 @@
                 android:src="@drawable/right_arrow"/>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textSize="15dp"
-                android:layout_marginTop="18dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:padding="5dp"
-                android:background="@drawable/edit_round"
-                android:layout_gravity="center"
-                />
 
         </LinearLayout>
 

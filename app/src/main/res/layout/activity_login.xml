@@ -10,7 +10,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
@@ -61,7 +61,7 @@
                 android:background="@drawable/edit_bg"
                 android:hint="Input your Email"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:textColor="#282828"
                 android:singleLine="true" />
 
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Input your password"
                     android:background="@drawable/edit_bg"
-                    android:textSize="48px"
+                    android:textSize="18dp"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 -->
@@ -112,7 +112,7 @@
                 android:background="@drawable/edit_bg"
                 android:hint="Input your password"
                 android:maxLines="1"
-                android:textSize="48px"
+                android:textSize="18dp"
                 android:inputType="textPassword"
                 android:textColor="#282828"
                 android:singleLine="true" />
@@ -165,6 +165,7 @@
             android:text="Login with social"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:visibility="invisible"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:gravity="center"/>
@@ -177,6 +178,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
+            android:visibility="invisible"
             android:layout_marginBottom="43dp"
             android:layout_marginTop="20dp"
             android:weightSum="2">

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:weightSum="2"
+        android:weightSum="3"
         android:background="@color/white">
 
         <LinearLayout
@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_weight="1.8">
+            android:layout_weight="1.3">
 
             <ImageView
                 android:id="@+id/back"
@@ -36,8 +36,9 @@
             android:background="@drawable/edit_bg_3"
             android:hint=" Brand, Model, Product Name"
             android:maxLines="1"
+            android:imeOptions="actionDone"
             android:drawableLeft="@mipmap/search"
-            android:layout_weight="0.2"
+            android:layout_weight="0.4"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:inputType="none"
@@ -45,6 +46,16 @@
             android:textSize="13dp"
             android:textColor="#282828"
             android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/filtter"/>
+
 
     </LinearLayout>
 
@@ -96,6 +107,7 @@
                     android:textSize="12dp"
                     android:textStyle="bold"
                     android:gravity="start"
+                    android:id="@+id/t1"
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_bg_search"
                     android:layout_gravity="center"
@@ -109,6 +121,7 @@
                     android:textSize="12dp"
                     android:textStyle="bold"
                     android:gravity="start"
+                    android:id="@+id/t2"
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_bg_search"
                     android:layout_gravity="center"
@@ -131,6 +144,7 @@
                     android:textSize="12dp"
                     android:textStyle="bold"
                     android:gravity="start"
+                    android:id="@+id/t3"
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_bg_search"
                     android:layout_gravity="center"
@@ -145,12 +159,46 @@
                     android:textSize="12dp"
                     android:textStyle="bold"
                     android:gravity="start"
+                    android:id="@+id/t4"
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_bg_search"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     />
 
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/no_data"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.3"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/no_data"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Search Available"
+                    android:textSize="14dp"
+                    android:layout_weight="1.2"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/gray"
+                    />
             </LinearLayout>
 
 
@@ -169,75 +217,11 @@
                 android:textColor="@color/black"
                 />
 
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-
-            <include layout="@layout/item_newproduct_search"/>
-
-            
-            <include layout="@layout/item_newproduct_search"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/new_product"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"/>
 
 
 
@@ -245,4 +229,37 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_data2"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/no_data"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Data Available"
+            android:textSize="14dp"
+            android:layout_weight="1.2"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/gray"
+            />
+    </LinearLayout>
+
 </RelativeLayout>
