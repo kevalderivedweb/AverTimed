@@ -1,5 +1,6 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Model.CategoryModel;
 import com.example.avertimed.Model.Product;
 import com.example.avertimed.R;
@@ -19,6 +21,7 @@ public class SubProductAdapter extends RecyclerView.Adapter<SubProductAdapter.My
 
     private final OnItemClickListener listener;
     private ArrayList<Product> mDataset;
+    private UserSession userSession;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -39,9 +42,10 @@ public class SubProductAdapter extends RecyclerView.Adapter<SubProductAdapter.My
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SubProductAdapter(ArrayList<Product> categoryModels, OnItemClickListener listener) {
+    public SubProductAdapter(Context context,ArrayList<Product> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
+        this.userSession = new UserSession(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -64,7 +68,7 @@ public class SubProductAdapter extends RecyclerView.Adapter<SubProductAdapter.My
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
         holder.textView.setText(mDataset.get(position).getProductTitleEn());
-        holder.price.setText(mDataset.get(position).getPrice());
+        holder.price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getPrice());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

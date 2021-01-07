@@ -205,9 +205,11 @@ public class Login_Activity extends AppCompatActivity {
                         String Language = object.getString("Language");
                         String Currency = object.getString("Currency");
                         String APIToken = object.getString("APIToken");
+                        String mCurrency = object.getString("Currency");
+                        String CurrencySign = object.getString("CurrencySign");
                         int IsEnablePushNotification = object.getInt("IsEnablePushNotification");
                         int IsActive = object.getInt("IsActive");
-                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive);
+                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive,mCurrency,CurrencySign);
 
                         Intent intent = new Intent(Login_Activity.this,ProductActivity.class);
                         startActivity(intent);
@@ -469,7 +471,7 @@ public class Login_Activity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
 
                     //create shared preference and store data
-                    session.createLoginSession("UserID","FirstName","LastName","Email","UserType","Language","Currency","APIToken",0,0);
+                  //  session.createLoginSession("UserID","FirstName","LastName","Email","UserType","Language","Currency","APIToken",0,0);
 
                     Intent intent = new Intent(Login_Activity.this,ProductActivity.class);
                     startActivity(intent);

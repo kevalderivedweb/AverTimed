@@ -47,11 +47,14 @@ public class ManageOrderActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private UserSession session;
     private ArrayList<OrderModel> orderModels =  new ArrayList<>();
-
+    private LinearLayoutManager linearLayout;
+    private int IntPage = 1;
+    private int last_size = 0;
     private CurrentProductAdapter mAdapter;
     private RecyclerView category_view;
     private String Order = "0";
     private LinearLayout LN_STATUS;
+    private boolean isCurrentOrder = true;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -95,7 +98,9 @@ public class ManageOrderActivity extends AppCompatActivity {
             }
         });
         category_view.setHasFixedSize(true);
-        category_view.setLayoutManager(new LinearLayoutManager(ManageOrderActivity.this, LinearLayoutManager.VERTICAL, false));
+        linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        category_view.setLayoutManager(linearLayout);
         category_view.setAdapter(mAdapter);
         category_view.setNestedScrollingEnabled(false);
 
@@ -110,30 +115,36 @@ public class ManageOrderActivity extends AppCompatActivity {
 
         if(Objects.requireNonNull(Order).equals("1")){
             LN_STATUS.setVisibility(View.GONE);
-            GetAddress("manage-orders");
+            orderModels.clear();
+            GetAddress("manage-orders",IntPage);
         }else {
-            GetAddress("get-current-orders");
+            orderModels.clear();
+            GetAddress("get-current-orders",IntPage);
         }
 
        current.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               isCurrentOrder = true;
                current.setBackgroundColor(getResources().getColor(R.color.sky_blue));
                txtcurrent.setTextColor(getResources().getColor(R.color.white));
                past.setBackgroundColor(getResources().getColor(R.color.white));
                txtpast.setTextColor(getResources().getColor(R.color.black));
-               GetAddress("get-current-orders");
+               orderModels.clear();
+               GetAddress("get-current-orders",IntPage);
            }
        });
 
         txtpast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isCurrentOrder = false;
                 current.setBackgroundColor(getResources().getColor(R.color.white));
                 txtcurrent.setTextColor(getResources().getColor(R.color.black));
                 past.setBackgroundColor(getResources().getColor(R.color.sky_blue));
                 txtpast.setTextColor(getResources().getColor(R.color.white));
-                GetAddress("get-past-orders");
+                orderModels.clear();
+                GetAddress("get-past-orders",IntPage);
             }
         });
 
@@ -144,10 +155,32 @@ public class ManageOrderActivity extends AppCompatActivity {
             }
         });
 
+        category_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayout) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                IntPage = page;
+                if (page!=last_size){
+                    int FinalOAgeSIze = page+1;
+                    if(Objects.requireNonNull(Order).equals("1")){
+                        LN_STATUS.setVisibility(View.GONE);
+                        GetAddress("manage-orders",FinalOAgeSIze);
+                    }else {
+                        if(isCurrentOrder){
+                            GetAddress("get-current-orders",FinalOAgeSIze);
+                        }else {
+                            GetAddress("get-past-orders",FinalOAgeSIze);
+                        }
+
+
+                    }
+
+                }
+            }
+        });
 
     }
 
-    private void GetAddress(String MethodName)  {
+    private void GetAddress(String MethodName,int page)  {
 
         final KProgressHUD progressDialog = KProgressHUD.create(ManageOrderActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -157,13 +190,13 @@ public class ManageOrderActivity extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-        GetCurrentOrderRequest loginRequest = new GetCurrentOrderRequest(MethodName,new Response.Listener<String>() {
+        GetCurrentOrderRequest loginRequest = new GetCurrentOrderRequest(MethodName,page,new Response.Listener<String>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
                 progressDialog.dismiss();
-                orderModels.clear();
+
 
                 JSONObject jsonObject = null;
                 try {

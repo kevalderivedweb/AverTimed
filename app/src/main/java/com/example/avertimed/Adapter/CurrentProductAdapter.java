@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Model.OrderModel;
 import com.example.avertimed.R;
 
@@ -19,6 +20,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
 
     private final OnItemClickListener listener;
     private final Context mContext;
+    private final UserSession userSession;
     private ArrayList<OrderModel> mDataset;
     private SubProductAdapter mAdapter;
     private int Pos = 0;
@@ -49,6 +51,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
         mDataset = categoryModels;
         this.listener = listener;
         this.mContext = ProductContext;
+        userSession = new UserSession(ProductContext);
     }
 
     // Create new views (invoked by the layout manager)
@@ -73,7 +76,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
 
         Pos = position;
         holder.order_num.setText("Order Code : "+mDataset.get(position).getOrderCode());
-        holder.price.setText("$ "+mDataset.get(position).getTotalAmount());
+        holder.price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getTotalAmount());
         holder.date.setText(mDataset.get(position).getDate());
         holder.cancel.setText(mDataset.get(position).getOrderStatus());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
@@ -87,7 +90,7 @@ public class CurrentProductAdapter extends RecyclerView.Adapter<CurrentProductAd
 
         Log.e("POS",mDataset.get(Pos).getProducts().get(0).getProductID());
 
-        mAdapter = new SubProductAdapter(mDataset.get(position).getProducts(), new SubProductAdapter.OnItemClickListener() {
+        mAdapter = new SubProductAdapter(mContext,mDataset.get(position).getProducts(), new SubProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
 

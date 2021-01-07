@@ -104,6 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
                 userSession.logout();
                 Intent intent =  new Intent(ProfileActivity.this, Login_Activity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -112,6 +113,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent =  new Intent(ProfileActivity.this,SettingActivity.class);
                 startActivity(intent);
+
             }
         });
         ln_shipping.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProfileActivity.this,ProductActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -171,6 +174,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProfileActivity.this,TransactionActivity.class);
                 startActivity(i);
+                finish();
+                finish();
 
 
             }
@@ -181,6 +186,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this,ProfileActivity.class);
                 startActivity(intent);
+                finish();
+                finish();
 
             }
         });
@@ -190,6 +197,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProfileActivity.this,AllCategories.class);
                 startActivity(i);
+                finish();
+                finish();
 
             }
         });

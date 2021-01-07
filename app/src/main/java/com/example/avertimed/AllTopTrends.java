@@ -70,7 +70,7 @@ public class AllTopTrends extends AppCompatActivity {
 
         session = new UserSession(getApplicationContext());
         category_view = findViewById(R.id.category_view);
-        mAdapter = new SugestAdapter2(categoryModels, new SugestAdapter2.OnItemClickListener() {
+        mAdapter = new SugestAdapter2(AllTopTrends.this,categoryModels, new SugestAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
                 Intent intent = new Intent(AllTopTrends.this,GeneralPracticeActivity.class);

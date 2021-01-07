@@ -1,5 +1,6 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.FavDatabaseModel;
 import com.example.avertimed.R;
 
@@ -20,6 +22,7 @@ public class ViewCartAdapter extends RecyclerView.Adapter<ViewCartAdapter.MyView
     private final OnItemClickListener listener;
     private List<FavDatabaseModel> mDataset;
     private int quantity = 1;
+    private UserSession userSession;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -45,9 +48,10 @@ public class ViewCartAdapter extends RecyclerView.Adapter<ViewCartAdapter.MyView
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ViewCartAdapter(List<FavDatabaseModel> categoryModels, OnItemClickListener listener) {
+    public ViewCartAdapter(Context context, List<FavDatabaseModel> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
+        userSession = new UserSession(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -72,7 +76,7 @@ public class ViewCartAdapter extends RecyclerView.Adapter<ViewCartAdapter.MyView
         quantity = Integer.parseInt(mDataset.get(position).getQT());
         holder.productname.setText(mDataset.get(position).getFavName());
         holder.productname1.setText(mDataset.get(position).getFavName());
-        holder.price.setText(mDataset.get(position).getPrice());
+        holder.price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getPrice());
         holder.edt_qt.setText(mDataset.get(position).getQT());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.plus_bg.setOnClickListener(new View.OnClickListener() {

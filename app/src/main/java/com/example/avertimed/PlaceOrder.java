@@ -125,7 +125,7 @@ public class PlaceOrder extends AppCompatActivity {
 
 
         category_view = findViewById(R.id.category_view);
-        mAdapter = new ViewCartAdapter2(DataArrayList, new ViewCartAdapter2.OnItemClickListener() {
+        mAdapter = new ViewCartAdapter2(PlaceOrder.this,DataArrayList, new ViewCartAdapter2.OnItemClickListener() {
             @Override
             public void onItemClickPlus(String item, int position) {
                // dbHelper.Update(DataArrayList.get(position).getId(),item);

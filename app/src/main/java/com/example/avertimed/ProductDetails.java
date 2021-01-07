@@ -49,6 +49,9 @@ public class ProductDetails extends AppCompatActivity {
     private int Category_id;
     private TextView total_product;
     private UserSession userSession;
+    private LinearLayoutManager linearLayout;
+    private int IntPage = 1;
+    private int last_size = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -63,7 +66,7 @@ public class ProductDetails extends AppCompatActivity {
         userSession = new UserSession(getApplicationContext());
         category_view = findViewById(R.id.category_view);
         total_product = findViewById(R.id.total_product);
-        mAdapter = new NewProductAdapter2(categoryModels, new NewProductAdapter2.OnItemClickListener() {
+        mAdapter = new NewProductAdapter2(ProductDetails.this,categoryModels, new NewProductAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
                 Intent intent = new Intent(ProductDetails.this,GeneralPracticeActivity.class);
@@ -72,7 +75,8 @@ public class ProductDetails extends AppCompatActivity {
             }
         });
         category_view.setHasFixedSize(true);
-        category_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        category_view.setLayoutManager(linearLayout);
         category_view.setAdapter(mAdapter);
         category_view.setNestedScrollingEnabled(false);
 
@@ -85,7 +89,7 @@ public class ProductDetails extends AppCompatActivity {
 
 
 
-        GetProduct(Category_id);
+        GetProduct(Category_id,IntPage);
 
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -95,10 +99,21 @@ public class ProductDetails extends AppCompatActivity {
             }
         });
 
+        category_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayout) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                IntPage = page;
+                if (page!=last_size){
+                    int FinalOAgeSIze = page+1;
+                    GetProduct(Category_id,FinalOAgeSIze);
+                }
+            }
+        });
+
 
     }
 
-    public void GetProduct(int category_id) {
+    public void GetProduct(int category_id,int page) {
 
         final KProgressHUD progressDialog = KProgressHUD.create(ProductDetails.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -107,7 +122,7 @@ public class ProductDetails extends AppCompatActivity {
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();
-        ProductBySubCategoryRequest loginRequest = new ProductBySubCategoryRequest(category_id,new Response.Listener<String>() {
+        ProductBySubCategoryRequest loginRequest = new ProductBySubCategoryRequest(category_id,page,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
@@ -119,6 +134,8 @@ public class ProductDetails extends AppCompatActivity {
 
 
                     JSONObject object1 = jsonObject.getJSONObject("data");
+                    last_size = object1.getInt("last_page");
+
                     JSONArray jsonArray = object1.getJSONArray("data");
                     total_product.setText(""+jsonArray.length() +" Product Found");
                     for(int i =0 ; i<jsonArray.length();i++){

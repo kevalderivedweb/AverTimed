@@ -46,6 +46,7 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.avertimed.API.CategoryRequest;
 import com.example.avertimed.API.ProductBySubCategoryRequest;
 import com.example.avertimed.API.SearchProductRequest;
+import com.example.avertimed.API.ServerUtils;
 import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.NewProductAdapter;
 import com.example.avertimed.Model.CategoryModel;
@@ -75,11 +76,17 @@ public class SearchActivity extends AppCompatActivity {
     private LinearLayout no_data;
     private TextView T1, T2, T3, T4;
     private String mCategoryName;
-    private String mCategoryPos = "0";
     private String mPriceLow="";
     private String mPriceHigh="";
     private String SortByPrice="low_to_high";
     private Spinner category;
+
+    private LinearLayoutManager linearLayout;
+    private int IntPage = 1;
+    private int last_size = 0;
+    private Spinner sub_category;
+    private String SUBCATEGORYNAME="";
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -99,8 +106,10 @@ public class SearchActivity extends AppCompatActivity {
         new_product = findViewById(R.id.new_product);
         search_activity = findViewById(R.id.search_activity);
         new_product.setHasFixedSize(true);
-        new_product.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        New_Product_mAdapter = new NewProductAdapter(categoryModels_NewProduct, new NewProductAdapter.OnItemClickListener() {
+        linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        new_product.setLayoutManager(linearLayout);
+        New_Product_mAdapter = new NewProductAdapter(SearchActivity.this,categoryModels_NewProduct, new NewProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
 
@@ -123,8 +132,8 @@ public class SearchActivity extends AppCompatActivity {
         T3 = findViewById(R.id.t3);
         T4 = findViewById(R.id.t4);
         search_data();
-        GetProduct("",mCategoryPos,mPriceLow,mPriceHigh,SortByPrice);
-        Log.e("Details", "???"+"----"+mCategoryPos+"----"+mPriceLow+"----"+mPriceHigh);
+        GetProduct("",SUBCATEGORYNAME,mPriceLow,mPriceHigh,SortByPrice,IntPage);
+        Log.e("Details", "???"+"----"+SUBCATEGORYNAME+"----"+mPriceLow+"----"+mPriceHigh);
 
         search_activity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -138,8 +147,8 @@ public class SearchActivity extends AppCompatActivity {
                     DataArrayList = dbHelper.getSearch();
 
 
-                    Log.e("Details", textView.getText().toString()+"----"+mCategoryPos+"----"+mPriceLow+"----"+mPriceHigh);
-                    GetProduct(textView.getText().toString(),mCategoryPos,mPriceLow,mPriceHigh,SortByPrice);
+                    Log.e("Details", textView.getText().toString()+"----"+SUBCATEGORYNAME+"----"+mPriceLow+"----"+mPriceHigh);
+                    GetProduct(textView.getText().toString(),SUBCATEGORYNAME,mPriceLow,mPriceHigh,SortByPrice,IntPage);
                     if (DataArrayList.size() >= 4) {
                         SIZE = 4;
                     } else {
@@ -217,9 +226,21 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        new_product.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayout) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                IntPage = page;
+                if (page!=last_size){
+                    int FinalOAgeSIze = page+1;
+                    GetProduct(search_activity.getText().toString(),SUBCATEGORYNAME,mPriceLow,mPriceHigh,SortByPrice,FinalOAgeSIze);
+
+                }
+            }
+        });
+
     }
 
-    public void GetProduct(String search,String cat_id,String low,String high,String SortByPrice) {
+    public void GetProduct(String search,String cat_id,String low,String high,String SortByPrice,int page) {
 
         categoryModels_NewProduct.clear();
         final KProgressHUD progressDialog = KProgressHUD.create(SearchActivity.this)
@@ -229,12 +250,11 @@ public class SearchActivity extends AppCompatActivity {
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();
-        SearchProductRequest loginRequest = new SearchProductRequest(search,cat_id,low,high,SortByPrice, new Response.Listener<String>() {
+        SearchProductRequest loginRequest = new SearchProductRequest(search,cat_id,low,high,SortByPrice, page,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
                 progressDialog.dismiss();
-                categoryModels_NewProduct.clear();
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response);
@@ -242,6 +262,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
                     JSONObject object1 = jsonObject.getJSONObject("data");
+                    last_size = object1.getInt("last_page");
+
                     JSONArray jsonArray = object1.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
@@ -300,6 +322,162 @@ public class SearchActivity extends AppCompatActivity {
         requestQueue.add(loginRequest);
 
     }
+
+
+    public void GetCategory(){
+        final KProgressHUD progressDialog = KProgressHUD.create(SearchActivity.this)
+                .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
+
+        progressDialog.show();
+        AndroidNetworking.get(ServerUtils.BASE_URL+"get-categories")
+                .addHeaders("Accept","application/json")
+                .addHeaders("Authorization","Bearer "+ userSession.getAPIToken())
+                .setTag("Feed")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response : ", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getInt("ResponseCode")==200) {
+
+                                try {
+
+                                    JSONArray jsonObject1 = jsonObject.getJSONArray("data");
+
+                                    final String[] City = new String[jsonObject1.length()];
+                                    final String[] CityId = new String[jsonObject1.length()];
+
+                                    for (int i = 0; i < jsonObject1.length(); i++) {
+                                        JSONObject object = jsonObject1.getJSONObject(i);
+                                        City[i] =  object.getString("CategoryNameEn");
+                                        CityId[i] =  object.getString("CategoryID");
+                                    }
+
+                                    ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(SearchActivity.this,
+                                            android.R.layout.simple_spinner_item, City);
+                                    category.setAdapter(adapter_age);
+                                    category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                                   int position, long id) {
+                                            Log.e("currency",""+position);
+                                            GetSubCategory(CityId[position]);
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else {
+
+                                Toast.makeText(SearchActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Toast.makeText(SearchActivity.this,"Unauthenticated",Toast.LENGTH_SHORT).show();}
+                });
+
+    }
+
+    public void GetSubCategory(String CategoryID){
+        final KProgressHUD progressDialog = KProgressHUD.create(SearchActivity.this)
+                .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                .setLabel("Please wait")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
+
+        progressDialog.show();
+        AndroidNetworking.get(ServerUtils.BASE_URL+"get-sub-categories?CategoryID="+CategoryID)
+                .addHeaders("Accept","application/json")
+                .addHeaders("Authorization","Bearer "+ userSession.getAPIToken())
+                .setTag("Feed")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response : ", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getInt("ResponseCode")==200) {
+
+                                try {
+
+                                    JSONArray jsonObject1 = jsonObject.getJSONArray("data");
+
+                                    final String[] City = new String[jsonObject1.length()];
+                                    final String[] CityId = new String[jsonObject1.length()];
+
+                                    for (int i = 0; i < jsonObject1.length(); i++) {
+                                        JSONObject object = jsonObject1.getJSONObject(i);
+                                        City[i] =  object.getString("SubCategoryNameEn");
+                                        CityId[i] =  object.getString("SubCategoryID");
+                                    }
+
+                                    ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(SearchActivity.this,
+                                            android.R.layout.simple_spinner_item, City);
+                                    sub_category.setAdapter(adapter_age);
+                                    sub_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                                   int position, long id) {
+                                            Log.e("currency",""+position);
+
+                                            SUBCATEGORYNAME = CityId[position];
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else {
+
+                                Toast.makeText(SearchActivity.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Toast.makeText(SearchActivity.this,"Unauthenticated",Toast.LENGTH_SHORT).show();}
+                });
+
+    }
+
 
 
     public void search_data() {
@@ -362,6 +540,7 @@ public class SearchActivity extends AppCompatActivity {
         final EditText high = dialog.findViewById(R.id.high);
         final EditText low = dialog.findViewById(R.id.low);
         category = (Spinner) dialog.findViewById(R.id.category);
+        sub_category = (Spinner) dialog.findViewById(R.id.sub_category);
         SwitchCompat shortby = (SwitchCompat) dialog.findViewById(R.id.shortby);
 
 
@@ -385,9 +564,9 @@ public class SearchActivity extends AppCompatActivity {
                 mPriceHigh = high.getText().toString();
                 mPriceLow = low.getText().toString();
                 dialog.dismiss();
-                Log.e("Details", search_activity.getText().toString()+"----"+mCategoryPos+"----"+mPriceLow+"----"+mPriceHigh);
+                Log.e("Details", search_activity.getText().toString()+"----"+SUBCATEGORYNAME+"----"+mPriceLow+"----"+mPriceHigh);
 
-                GetProduct(search_activity.getText().toString(),mCategoryPos,mPriceLow,mPriceHigh,SortByPrice);
+                GetProduct(search_activity.getText().toString(),SUBCATEGORYNAME,mPriceLow,mPriceHigh,SortByPrice,IntPage);
 
             }
         });
@@ -400,80 +579,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-
-    }
-
-
-    public void GetCategory() {
-
-        CategoryRequest loginRequest = new CategoryRequest(new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("Response", response + " null");
-
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response);
-                    // Toast.makeText(AllCategories.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
-                    if (jsonObject.getString("ResponseCode").equals("200")) {
-
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-
-                        String[] Category = new String[jsonArray.length()];
-                        final String[] CategoryID = new String[jsonArray.length()];
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            Category[i] = object.getString("CategoryNameEn");
-                            CategoryID[i] = object.getString("CategoryID");
-                        }
-
-
-                        ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(SearchActivity.this,
-                                android.R.layout.simple_spinner_item, Category);
-                        category.setAdapter(adapter_age);
-                        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view,
-                                                       int position, long id) {
-                                mCategoryName = (String) parent.getItemAtPosition(position);
-                                mCategoryPos = CategoryID[position];
-                                Log.v("item", (String) parent.getItemAtPosition(position));
-                             //   Log.e("mCityName", mCityName);
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-                                // TODO Auto-generated method stub
-                            }
-                        });
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                if (error instanceof ServerError)
-                    Toast.makeText(SearchActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                else if (error instanceof TimeoutError)
-                    Toast.makeText(SearchActivity.this, "Connection Timed Out", Toast.LENGTH_SHORT).show();
-                else if (error instanceof NetworkError)
-                    Toast.makeText(SearchActivity.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
-            }
-        }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("Accept", "application/json");
-            params.put("Authorization","Bearer "+ userSession.getAPIToken());
-            return params;
-        }};
-        loginRequest.setTag("TAG");
-        loginRequest.setShouldCache(false);
-        requestQueue.add(loginRequest);
 
     }
 

@@ -205,9 +205,11 @@ public class EditProfile extends AppCompatActivity {
                         String Language = object.getString("Language");
                         String Currency = object.getString("Currency");
                         String APIToken = object.getString("APIToken");
+                        String mCurrency = object.getString("Currency");
+                        String CurrencySign = object.getString("CurrencySign");
                         int IsEnablePushNotification = object.getInt("IsEnablePushNotification");
                         int IsActive = object.getInt("IsActive");
-                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive);
+                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive,mCurrency,CurrencySign);
 
 
                         finish();
@@ -500,10 +502,12 @@ public class EditProfile extends AppCompatActivity {
                         String Language = object.getString("Language");
                         String Currency = object.getString("Currency");
                         String APIToken = object.getString("api_token");
+                        String mCurrency = object.getString("Currency");
+                        session.createProfileSession(Country,State,City,Address,Mob);
+                        String CurrencySign = object.getString("CurrencySign");
                         int IsEnablePushNotification = object.getInt("IsEnablePushNotification");
                         int IsActive = object.getInt("IsActive");
-                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive);
-                        session.createProfileSession(Country,State,City,Address,Mob);
+                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive,mCurrency,CurrencySign);
 
                         finish();
                     }else {

@@ -47,6 +47,9 @@ public class AllProduct extends AppCompatActivity {
     private NewProductAdapter mAdapter;
     private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
     private UserSession session;
+    private LinearLayoutManager linearLayout;
+    private int IntPage = 1;
+    private int last_size = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -68,26 +71,38 @@ public class AllProduct extends AppCompatActivity {
         });
 
         category_view = findViewById(R.id.category_view);
-        mAdapter = new NewProductAdapter(categoryModels, new NewProductAdapter.OnItemClickListener() {
+        mAdapter = new NewProductAdapter(AllProduct.this,categoryModels, new NewProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
-                Intent i = new Intent(AllProduct.this, SubCategories.class);
-                Log.e("Category_id",""+categoryModels.get(item).getCat_id());
-                i.putExtra("Category_id", categoryModels.get(item).getCat_id());
-                startActivity(i);
+
+
+                Intent intent = new Intent(AllProduct.this,GeneralPracticeActivity.class);
+                intent.putExtra("ProductId",categoryModels.get(item).getCat_id());
+                startActivity(intent);
             }
         });
         category_view.setHasFixedSize(true);
-        category_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        category_view.setLayoutManager(linearLayout);
         category_view.setAdapter(mAdapter);
         category_view.setNestedScrollingEnabled(false);
         session = new UserSession(getApplicationContext());
-        GetProduct();
-
+        GetProduct(IntPage);
+        category_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayout) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                IntPage = page;
+                if (page!=last_size){
+                    int FinalOAgeSIze = page+1;
+                    GetProduct(FinalOAgeSIze);
+                }
+            }
+        });
 
     }
 
-    public void GetProduct() {
+    public void GetProduct(int page) {
 
         final KProgressHUD progressDialog = KProgressHUD.create(AllProduct.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -96,7 +111,7 @@ public class AllProduct extends AppCompatActivity {
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();
-        ProductRequest loginRequest = new ProductRequest(new Response.Listener<String>() {
+        ProductRequest loginRequest = new ProductRequest(page,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
@@ -108,6 +123,8 @@ public class AllProduct extends AppCompatActivity {
 
 
                     JSONObject object1 = jsonObject.getJSONObject("data");
+                    last_size = object1.getInt("last_page");
+
                     JSONArray jsonArray = object1.getJSONArray("data");
 
                     for(int i =0 ; i<jsonArray.length();i++){
@@ -141,13 +158,17 @@ public class AllProduct extends AppCompatActivity {
                 else if (error instanceof NetworkError)
                     Toast.makeText(AllProduct.this, "Bad Network Connection", Toast.LENGTH_SHORT).show();
             }
-        }){@Override
+        })
+        {
+            @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             Map<String, String> params = new HashMap<String, String>();
             params.put("Accept", "application/json");
             params.put("Authorization","Bearer "+ session.getAPIToken());
             return params;
-        }};        loginRequest.setTag("TAG");
+        }
+
+        };        loginRequest.setTag("TAG");
         loginRequest.setShouldCache(false);
 
         requestQueue.add(loginRequest);

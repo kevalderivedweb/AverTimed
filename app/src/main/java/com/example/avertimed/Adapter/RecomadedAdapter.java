@@ -1,5 +1,6 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Model.CategoryModel;
 import com.example.avertimed.R;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 
 public class RecomadedAdapter extends RecyclerView.Adapter<RecomadedAdapter.MyViewHolder> {
 
+    private final UserSession userSession;
     private final OnItemClickListener listener;
     private ArrayList<CategoryModel> mDataset;
 
@@ -38,7 +41,8 @@ public class RecomadedAdapter extends RecyclerView.Adapter<RecomadedAdapter.MyVi
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecomadedAdapter(ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+    public RecomadedAdapter(Context context,ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+        userSession = new UserSession(context);
         mDataset = categoryModels;
         this.listener = listener;
     }
@@ -63,7 +67,7 @@ public class RecomadedAdapter extends RecyclerView.Adapter<RecomadedAdapter.MyVi
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
         holder.textView.setText(mDataset.get(position).getCat_name_en());
-        holder.price.setText(" $ "+mDataset.get(position).getTxt_price());
+        holder.price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getTxt_price());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

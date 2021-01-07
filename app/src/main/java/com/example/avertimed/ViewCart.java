@@ -53,7 +53,7 @@ public class ViewCart extends AppCompatActivity {
 
 
         category_view = findViewById(R.id.category_view);
-        mAdapter = new ViewCartAdapter(DataArrayList, new ViewCartAdapter.OnItemClickListener() {
+        mAdapter = new ViewCartAdapter(ViewCart.this,DataArrayList, new ViewCartAdapter.OnItemClickListener() {
             @Override
             public void onItemClickPlus(String item, int position) {
                 dbHelper.Update(DataArrayList.get(position).getId(),item);

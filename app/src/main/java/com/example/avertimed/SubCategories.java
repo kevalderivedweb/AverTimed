@@ -138,7 +138,7 @@ public class SubCategories extends AppCompatActivity {
                             categoryModel.setCat_id(object.getInt("SubCategoryID"));
                             categoryModel.setCat_name_en(object.getString("SubCategoryNameEn"));
                             categoryModel.setCat_name_fr(object.getString("SubCategoryNameFr"));
-                            categoryModel.setCat_name_image("");
+                            categoryModel.setCat_name_image(object.getString("SubCategoryImage"));
                             categoryModels.add(categoryModel);
                         }
 

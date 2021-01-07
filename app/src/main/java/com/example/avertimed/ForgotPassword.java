@@ -74,7 +74,7 @@ public class ForgotPassword extends AppCompatActivity {
 
     }
 
-    private void GetForgotPassword(String Email) {
+    private void GetForgotPassword(final String Email) {
         final KProgressHUD progressDialog = KProgressHUD.create(ForgotPassword.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -94,7 +94,8 @@ public class ForgotPassword extends AppCompatActivity {
                     jsonObject = new JSONObject(response);
                     Toast.makeText(ForgotPassword.this,jsonObject.getString("ResponseMsg"),Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(ForgotPassword.this,Login_Activity.class);
+                    Intent intent = new Intent(ForgotPassword.this,CheckOTPPassword.class);
+                    intent.putExtra("email",Email);
                     startActivity(intent);
                     finish();
                 } catch (JSONException e) {

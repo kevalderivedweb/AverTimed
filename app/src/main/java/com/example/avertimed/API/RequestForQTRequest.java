@@ -23,8 +23,8 @@ public class RequestForQTRequest extends StringRequest {
         parameters.put("Name", Name);
         parameters.put("Email", Email);
         parameters.put("PhoneNo", PhoneNo);
-        parameters.put("CategoryID", "1");
-        parameters.put("SubCategoryID", "1");
+        parameters.put("CategoryID", CategoryID);
+        parameters.put("SubCategoryID",SubCategoryId);
         parameters.put("Quantity", QT);
         parameters.put("Message", Message);
     }

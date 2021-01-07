@@ -26,6 +26,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
@@ -36,6 +37,7 @@ import com.example.avertimed.API.ProductRequest;
 import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.NewProductAdapter;
 import com.example.avertimed.Model.CategoryModel;
+import com.example.avertimed.Model.Product;
 import com.google.android.material.tabs.TabLayout;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -101,6 +103,8 @@ public class ProductActivity extends AppCompatActivity {
 
 
 
+        Toast.makeText(ProductActivity.this,userSession.getUserAddress(),Toast.LENGTH_LONG).show();
+
 
 
 
@@ -125,8 +129,6 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-
-
         findViewById(R.id.msg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,13 +149,6 @@ public class ProductActivity extends AppCompatActivity {
         });
 */
 
-
-
-
-
-
-
-
         adapterView = new ImageAdapter(this,categoryModels_Imageview);
         mViewPager.setAdapter(adapterView);
         indicator.setupWithViewPager(mViewPager, true);
@@ -164,7 +159,7 @@ public class ProductActivity extends AppCompatActivity {
         newproduct = findViewById(R.id.newproduct);
         new_product.setHasFixedSize(true);
         new_product.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        New_Product_mAdapter = new NewProductAdapter(categoryModels_NewProduct, new NewProductAdapter.OnItemClickListener() {
+        New_Product_mAdapter = new NewProductAdapter(ProductActivity.this,categoryModels_NewProduct, new NewProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
 
@@ -189,7 +184,7 @@ public class ProductActivity extends AppCompatActivity {
         c_rvreq.setAdapter(mAdapter);
         c_rvreq.setNestedScrollingEnabled(false);
 
-        mAdapter_2 = new SugestAdapter2(categoryModels_TopTrend,new SugestAdapter2.OnItemClickListener() {
+        mAdapter_2 = new SugestAdapter2(ProductActivity.this,categoryModels_TopTrend,new SugestAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(int item) {
                 Intent intent = new Intent(ProductActivity.this,GeneralPracticeActivity.class);
@@ -254,6 +249,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProductActivity.this,ProductActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -263,6 +259,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProductActivity.this,TransactionActivity.class);
                 startActivity(i);
+                finish();
 
 
             }
@@ -296,6 +293,7 @@ public class ProductActivity extends AppCompatActivity {
 
 
                 }
+                finish();
 
             }
         });
@@ -305,6 +303,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(ProductActivity.this,AllCategories.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -387,6 +386,11 @@ public class ProductActivity extends AppCompatActivity {
                         mAdapter.notifyDataSetChanged();
                         New_Product_mAdapter.notifyDataSetChanged();
                         mAdapter_2.notifyDataSetChanged();
+                    }else if (jsonObject.getInt("ResponseCode")==401)  {
+                        userSession.logout();
+                        Intent intent =  new Intent(ProductActivity.this, Login_Activity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -400,6 +404,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 progressDialog.dismiss();
+
                 if (error instanceof ServerError)
                     Toast.makeText(ProductActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                 else if (error instanceof TimeoutError)
@@ -416,7 +421,6 @@ public class ProductActivity extends AppCompatActivity {
         }};
         loginRequest.setTag("TAG");
         loginRequest.setShouldCache(false);
-
         requestQueue.add(loginRequest);
 
     }

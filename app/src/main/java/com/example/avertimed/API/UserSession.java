@@ -30,6 +30,7 @@ public class UserSession {
 
     // First time logic Check
     public static final String FIRST_TIME = "firsttime";
+    public static final String CURRENCYSIGN = "CURRENCYSIGN";
 
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
@@ -78,6 +79,19 @@ public class UserSession {
     // check first time app launch
     public static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
+
+    public static final String CUR_Name = "Currency_name";
+
+
+    //User Details Location
+    public static final String KEY_FeatureName = "FeatureName";
+    public static final String KEY_Thoroughfare = "Thoroughfare";
+    public static final String KEY_Locality = "Locality";
+    public static final String KEY_SubAdminArea = "SubAdminArea";
+    public static final String KEY_AdminArea = "AdminArea";
+    public static final String KEY_CountryName = "CountryName";
+    public static final String KEY_PostalCode = "PostalCode";
+
     // Constructor
     public UserSession(Context context) {
         this.context = context;
@@ -98,7 +112,7 @@ public class UserSession {
      * @param isEnablePushNotification
      * @param isActive
      */
-    public void createLoginSession(String userID, String firstName, String lastName, String email, String userType, String language, String currency, String APIToken, int isEnablePushNotification, int isActive) {
+    public void createLoginSession(String userID, String firstName, String lastName, String email, String userType, String language, String currency, String APIToken, int isEnablePushNotification, int isActive,String Currency_name,String Currency_Sign) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -127,6 +141,9 @@ public class UserSession {
         editor.putString(KEY_PARENT_EMAIL, email);
         editor.putString(KEY_PARENT_LNAME, lastName);
         editor.putString(KEY_PARENT_NAME, firstName);
+        editor.putString(KEY_PARENT_NAME, firstName);
+        editor.putString(CUR_Name, Currency_name);
+        editor.putString(CURRENCYSIGN, Currency_Sign);
       //  editor.putString(KEY_PARENT_USER_ID, user_id);
      //   editor.putString(KEY_SELECTED_USER_ID, user_id);
         // commit changes
@@ -165,6 +182,30 @@ public class UserSession {
      * If false it will redirect user to login page
      * Else won't do anything
      */
+
+
+    public  void UserAddress(String FeatureName,String Thoroughfare,String Locality
+            ,String SubAdminArea,String AdminArea,String CountryName,String PostalCode){
+
+        editor.putString(KEY_FeatureName, FeatureName);
+        editor.putString(KEY_Thoroughfare, Thoroughfare);
+        editor.putString(KEY_Locality, Locality);
+        editor.putString(KEY_SubAdminArea, SubAdminArea);
+        editor.putString(KEY_AdminArea, AdminArea);
+        editor.putString(KEY_CountryName, CountryName);
+        editor.putString(KEY_PostalCode, PostalCode);
+        editor.commit();
+    }
+
+
+    public String getUserAddress() {
+
+        return pref.getString(KEY_FeatureName, "") + "\n" + pref.getString(KEY_Thoroughfare, "") + "\n" +
+                "Locality: " + pref.getString(KEY_Locality, "") + "\n" + "City: " + pref.getString(KEY_SubAdminArea, "") + "\n" +
+                "State: " + pref.getString(KEY_AdminArea, "") + "\n" + "Country: " + pref.getString(KEY_CountryName, "") + "\n" +
+                "Postal Code: " + pref.getString(KEY_PostalCode, "") + "\n";
+
+    }
 
 
     /**
@@ -299,6 +340,12 @@ public class UserSession {
     public void setFirstTime(Boolean n) {
         editor.putBoolean(FIRST_TIME, n);
         editor.commit();
+    }
+
+
+
+    public String getCurremcySign() {
+        return pref.getString(CURRENCYSIGN, "");
     }
 
     public void setSelctedUser(String user_id) {

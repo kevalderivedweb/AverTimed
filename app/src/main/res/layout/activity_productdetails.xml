@@ -37,6 +37,7 @@
             android:background="@drawable/edit_bg_3"
             android:hint=" Brand, Model, Product Name"
             android:maxLines="1"
+            android:visibility="invisible"
             android:drawableLeft="@mipmap/search"
             android:layout_weight="0.2"
             android:layout_marginLeft="15dp"

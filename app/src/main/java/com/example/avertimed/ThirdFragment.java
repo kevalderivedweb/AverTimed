@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Adapter.CategoryAdapter;
 import com.example.avertimed.Adapter.RecomadedAdapter;
 import com.example.avertimed.Model.CategoryModel;
@@ -31,6 +32,7 @@ public class ThirdFragment extends Fragment {
 	private ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 	private RecyclerView category_view;
 	private RecomadedAdapter mAdapter;
+	private UserSession userSession;
 
 
 	// Store instance variables based on arguments passed
@@ -49,6 +51,7 @@ public class ThirdFragment extends Fragment {
 		String strtext = getArguments().getString("recomendation");
 		Log.e("recomendationRes",""+strtext);
 
+		userSession = new UserSession(getActivity());
 		try {
 			JSONArray jsonArray = new JSONArray(strtext);
 			for(int i =0 ; i<jsonArray.length();i++){
@@ -68,7 +71,7 @@ public class ThirdFragment extends Fragment {
 		}
 
 		category_view = view.findViewById(R.id.category_view);
-		mAdapter = new RecomadedAdapter(categoryModels, new RecomadedAdapter.OnItemClickListener() {
+		mAdapter = new RecomadedAdapter(getActivity(),categoryModels, new RecomadedAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int item) {
 

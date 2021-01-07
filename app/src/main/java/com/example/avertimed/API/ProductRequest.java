@@ -14,8 +14,8 @@ public class ProductRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public ProductRequest(Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(Method.GET, ServerUtils.BASE_URL+"get-products", listener, null);
+    public ProductRequest(int page,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        super(Method.GET, ServerUtils.BASE_URL+"get-products?page="+page, listener, null);
 
     }
 

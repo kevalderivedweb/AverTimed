@@ -14,8 +14,8 @@ public class ProductBySubCategoryRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public ProductBySubCategoryRequest(int CategoryID, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(Method.GET, ServerUtils.BASE_URL+"get-products-by-sub-category?"+"SubCategoryID="+CategoryID, listener, null);
+    public ProductBySubCategoryRequest(int CategoryID,int page, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        super(Method.GET, ServerUtils.BASE_URL+"get-products-by-sub-category?"+"SubCategoryID="+CategoryID+"&page="+page, listener, null);
 
     }
 

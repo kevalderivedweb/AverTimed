@@ -1,5 +1,6 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.Model.CategoryModel;
 import com.example.avertimed.R;
 
@@ -16,8 +18,10 @@ import java.util.ArrayList;
 
 public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.MyViewHolder> {
 
+    private final Context mContext;
     private final OnItemClickListener listener;
     private ArrayList<CategoryModel> mDataset;
+    private UserSession userSession;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -38,9 +42,11 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public NewProductAdapter(ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+    public NewProductAdapter(Context context, ArrayList<CategoryModel> categoryModels, OnItemClickListener listener) {
+        mContext = context;
         mDataset = categoryModels;
         this.listener = listener;
+        userSession = new UserSession(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -63,7 +69,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
         // - replace the contents of the view with that element
         // holder.textView.setText(mDataset[position]);
         holder.textView.setText(mDataset.get(position).getDescription());
-        holder.txt_price.setText("$"+mDataset.get(position).getTxt_price());
+        holder.txt_price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getTxt_price());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

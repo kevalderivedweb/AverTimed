@@ -1,5 +1,6 @@
 package com.example.avertimed.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.avertimed.API.UserSession;
 import com.example.avertimed.FavDatabaseModel;
 import com.example.avertimed.R;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class ViewCartAdapter2 extends RecyclerView.Adapter<ViewCartAdapter2.MyViewHolder> {
 
     private final OnItemClickListener listener;
+    private final UserSession userSession;
     private List<FavDatabaseModel> mDataset;
     private int quantity = 1;
     // Provide a reference to the views for each data item
@@ -44,9 +47,10 @@ public class ViewCartAdapter2 extends RecyclerView.Adapter<ViewCartAdapter2.MyVi
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ViewCartAdapter2(List<FavDatabaseModel> categoryModels, OnItemClickListener listener) {
+    public ViewCartAdapter2(Context context,List<FavDatabaseModel> categoryModels, OnItemClickListener listener) {
         mDataset = categoryModels;
         this.listener = listener;
+        userSession = new UserSession(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -71,7 +75,7 @@ public class ViewCartAdapter2 extends RecyclerView.Adapter<ViewCartAdapter2.MyVi
         quantity = Integer.parseInt(mDataset.get(position).getQT());
         holder.productname.setText(mDataset.get(position).getFavName());
         holder.productname1.setText(mDataset.get(position).getFavName());
-        holder.price.setText(mDataset.get(position).getPrice());
+        holder.price.setText(userSession.getCurremcySign()+" "+mDataset.get(position).getPrice());
         holder.edt_qt.setText(mDataset.get(position).getQT());
       //  holder.img.setBackgroundResource(mmyDataset[position]);
         holder.plus_bg.setOnClickListener(new View.OnClickListener() {

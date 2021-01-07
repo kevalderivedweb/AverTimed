@@ -15,14 +15,15 @@ public class SearchProductRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public SearchProductRequest(String Search,String SubCategoryID,String FromPrice,String ToPrice,String SortByPrice, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(Method.POST, ServerUtils.BASE_URL+"search-products", listener, null);
+    public SearchProductRequest(String Search,String SubCategoryID,String FromPrice,String ToPrice,String SortByPrice, int page,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        super(Method.POST, ServerUtils.BASE_URL+"search-products?page="+page, listener, null);
         parameters = new HashMap<>();
         parameters.put("Search", Search);
         parameters.put("SubCategoryID", SubCategoryID);
         parameters.put("FromPrice", FromPrice);
         parameters.put("ToPrice", ToPrice);
         parameters.put("SortByPrice", SortByPrice);
+
     }
 
 

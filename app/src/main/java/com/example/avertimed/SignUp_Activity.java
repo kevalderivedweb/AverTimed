@@ -1,13 +1,21 @@
 package com.example.avertimed;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -36,6 +44,11 @@ import com.example.avertimed.API.LoginRequest;
 import com.example.avertimed.API.RegistrationRequest;
 import com.example.avertimed.API.ServerUtils;
 import com.example.avertimed.API.UserSession;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
@@ -52,8 +65,16 @@ public class SignUp_Activity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private RequestQueue requestQueue;
     private UserSession session;
-    private int mCurencyPos = 1;
+    private String mCurency;
     private Spinner mCity;
+
+    private FusedLocationProviderClient fusedLocationClient;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
+    private LocationAddressResultReceiver addressResultReceiver;
+    private Location currentLocation;
+    private LocationCallback locationCallback;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -122,7 +143,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 }else if(!Password_1.getText().toString().equals(Password_2.getText().toString())){
                     Toast.makeText(getApplicationContext(),"Enter Valid Password",Toast.LENGTH_SHORT).show();
                 }else {
-                    GetRegistration(FirstName.getText().toString(),LastName.getText().toString(),Email.getText().toString(),Password_1.getText().toString(),Password_2.getText().toString(), String.valueOf(mCurencyPos));
+                    GetRegistration(FirstName.getText().toString(),LastName.getText().toString(),Email.getText().toString(),Password_1.getText().toString(),Password_2.getText().toString(), mCurency);
                 }
             }
         });
@@ -136,9 +157,22 @@ public class SignUp_Activity extends AppCompatActivity {
         });
 
         GetCity();
+
+        addressResultReceiver = new LocationAddressResultReceiver(new Handler());
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                currentLocation = locationResult.getLocations().get(0);
+                getAddress();
+            }
+        };
+        startLocationUpdates();
+
+
     }
 
-    private void GetRegistration(String FirstName, String Lastname, String Email, String Password, String Password2,String currency) {
+    private void GetRegistration(String FirstName, String Lastname, String Email, String Password, String Password2, final String currency) {
 
 
         Log.e("currency",currency);
@@ -171,9 +205,11 @@ public class SignUp_Activity extends AppCompatActivity {
                         String Language = object.getString("Language");
                         String Currency = object.getString("Currency");
                         String APIToken = object.getString("APIToken");
+                        String mCurrency = object.getString("Currency");
+                        String CurrencySign = object.getString("CurrencySign");
                         int IsEnablePushNotification = object.getInt("IsEnablePushNotification");
                         int IsActive = object.getInt("IsActive");
-                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive);
+                        session.createLoginSession(UserID,FirstName,LastName,Email,UserType,Language,Currency,APIToken,IsEnablePushNotification,IsActive,mCurrency,CurrencySign);
 
                         Intent intent = new Intent(SignUp_Activity.this,ProductActivity.class);
                         startActivity(intent);
@@ -233,24 +269,27 @@ public class SignUp_Activity extends AppCompatActivity {
 
                                     JSONArray jsonObject1 = jsonObject.getJSONArray("data");
 
-                                    String[] City = new String[jsonObject1.length()];
+                                    final String[] CurrencyId = new String[jsonObject1.length()];
+                                    String[] Currency = new String[jsonObject1.length()];
+                                    final String[] CurrencySign = new String[jsonObject1.length()];
 
                                     for (int i = 0; i < jsonObject1.length(); i++) {
                                         JSONObject object = jsonObject1.getJSONObject(i);
-                                        City[i] =  object.getString("Currency");
+                                        CurrencyId[i] =  object.getString("CurrencyID");
+                                        Currency[i] =  object.getString("Currency");
+                                        CurrencySign[i] =  object.getString("CurrencySign");
                                     }
 
 
 
                                     ArrayAdapter<String> adapter_age = new ArrayAdapter<String>(SignUp_Activity.this,
-                                            android.R.layout.simple_spinner_item, City);
+                                            android.R.layout.simple_spinner_item, Currency);
                                     mCity.setAdapter(adapter_age);
                                     mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                         @Override
                                         public void onItemSelected(AdapterView<?> parent, View view,
                                                                    int position, long id) {
-                                            Log.e("currency",""+position);
-                                            mCurencyPos = position+1;
+                                             mCurency = CurrencyId[position];
                                         }
 
                                         @Override
@@ -280,4 +319,70 @@ public class SignUp_Activity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("MissingPermission")
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
+        else {
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(2000);
+            locationRequest.setFastestInterval(1000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        }
+    }
+    @SuppressWarnings("MissingPermission")
+    private void getAddress() {
+        if (!Geocoder.isPresent()) {
+            Toast.makeText(SignUp_Activity.this, "Can't find current address, ",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, GetAddressIntentService.class);
+        intent.putExtra("add_receiver", addressResultReceiver);
+        intent.putExtra("add_location", currentLocation);
+        startService(intent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
+            int[] grantResults) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates();
+            }
+            else {
+                Toast.makeText(this, "Location permission not granted, " + "restart the app if you want the feature", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private class LocationAddressResultReceiver extends ResultReceiver {
+        LocationAddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if (resultCode == 0) {
+                Log.d("Address", "Location null retrying");
+                getAddress();
+            }
+            if (resultCode == 1) {
+                Toast.makeText(SignUp_Activity.this, "Address not found, ", Toast.LENGTH_SHORT).show();
+            }
+            String currentAdd = resultData.getString("address_result");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+    }
 }

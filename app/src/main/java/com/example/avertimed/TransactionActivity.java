@@ -49,7 +49,9 @@ public class TransactionActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private UserSession session;
 
-
+    private LinearLayoutManager linearLayout;
+    private int IntPage = 1;
+    private int last_size = 0;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class TransactionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(TransactionActivity.this,ProductActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -90,6 +93,7 @@ public class TransactionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(TransactionActivity.this,TransactionActivity.class);
                 startActivity(i);
+                finish();
 
 
             }
@@ -123,6 +127,7 @@ public class TransactionActivity extends AppCompatActivity {
 
 
                 }
+                finish();
 
             }
         });
@@ -132,6 +137,7 @@ public class TransactionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i  = new Intent(TransactionActivity.this,AllCategories.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -153,15 +159,27 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
         category_view.setHasFixedSize(true);
-        category_view.setLayoutManager(new LinearLayoutManager(TransactionActivity.this, LinearLayoutManager.VERTICAL, false));
+        linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        category_view.setLayoutManager(linearLayout);
         category_view.setAdapter(mAdapter);
         category_view.setNestedScrollingEnabled(false);
 
+        category_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayout) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                IntPage = page;
+                if (page!=last_size){
+                    int FinalOAgeSIze = page+1;
+                    GetAddress("get-transactions",FinalOAgeSIze);
+                }
+            }
+        });
 
-        GetAddress("get-transactions");
+        GetAddress("get-transactions",IntPage);
     }
 
-    private void GetAddress(String MethodName)  {
+    private void GetAddress(String MethodName,int page)  {
 
         final KProgressHUD progressDialog = KProgressHUD.create(TransactionActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -171,19 +189,21 @@ public class TransactionActivity extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-        GetCurrentOrderRequest loginRequest = new GetCurrentOrderRequest(MethodName,new Response.Listener<String>() {
+        GetCurrentOrderRequest loginRequest = new GetCurrentOrderRequest(MethodName,page,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response", response + " null");
                 progressDialog.dismiss();
-                orderModels.clear();
 
 
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response);
 
-                    JSONArray object = jsonObject.getJSONArray("data");
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("data");
+                    last_size = jsonObject1.getInt("last_page");
+
+                    JSONArray object = jsonObject1.getJSONArray("data");
                     for (int i= 0 ; i < object.length();i++){
                         JSONObject object1 = object.getJSONObject(i);
                         OrderModel orderModel  = new OrderModel();

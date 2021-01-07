@@ -239,10 +239,10 @@ public class GeneralPracticeActivity extends AppCompatActivity {
                     Glide.with(GeneralPracticeActivity.this).load(object1.getString("ProductImage")).placeholder(R.drawable.product_1).into(ProductImage);
 
                     ProductTitle.setText(object1.getString("ProductTitleEn"));
-                    ProductPrice.setText(" $ "+object1.getString("Price"));
+                    ProductPrice.setText(session.getCurremcySign()+" "+object1.getString("Price"));
 
 
-                    ProductPriceProduct = " $ "+object1.getString("Price");
+                    ProductPriceProduct = session.getCurremcySign()+" "+object1.getString("Price");
 
                     ProductName = object1.getString("ProductTitleEn");
                     ProductImageUrl = object1.getString("ProductImage");
