@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "667300994304",
-    "firebase_url": "https://avertimed.firebaseio.com",
-    "project_id": "avertimed",
-    "storage_bucket": "avertimed.appspot.com"
+    "project_number": "285310071345",
+    "project_id": "avertimed-4a753",
+    "storage_bucket": "avertimed-4a753.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:667300994304:android:092e398158a45ec20067e5",
+        "mobilesdk_app_id": "1:285310071345:android:253d7d857796e17d3c9b10",
         "android_client_info": {
-          "package_name": "com.example.avertimed"
+          "package_name": "com.purchase.avertimed"
         }
       },
       "oauth_client": [
         {
-          "client_id": "667300994304-padmrlmrdf760vu3dgi9t9lt0trteila.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.avertimed",
-            "certificate_hash": "bdbe2531d99769457071e36aef77f67d36f49812"
-          }
-        },
-        {
-          "client_id": "667300994304-v0npk1n3rrdshp56ap2uqd1cdc0p76ve.apps.googleusercontent.com",
+          "client_id": "285310071345-7ga78speebd43b4hvtb5sib3p7sscnl0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQ32wefbixlQVYoaXzgzgv9WFOY-rnWsU"
+          "current_key": "AIzaSyCerL84zmK3wFMo0n_IeZUtmw-Y-SsYgzs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "667300994304-v0npk1n3rrdshp56ap2uqd1cdc0p76ve.apps.googleusercontent.com",
+              "client_id": "285310071345-7ga78speebd43b4hvtb5sib3p7sscnl0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
