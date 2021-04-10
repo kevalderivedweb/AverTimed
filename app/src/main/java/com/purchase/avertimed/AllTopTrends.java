@@ -97,6 +97,8 @@ public class AllTopTrends extends AppCompatActivity {
                 .setDimAmount(0.5f)
                 .show();
 
+        //jbhjb
+
         HomeRequest loginRequest = new HomeRequest(new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
