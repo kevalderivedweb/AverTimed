@@ -6,8 +6,7 @@ public class CategoryModel {
     public String cat_name_en;
     public String txt_price;
     public String description;
-
-    //dfsfsf
+    
 
     public String getDescription() {
         return description;
