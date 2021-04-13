@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -35,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class SubCategories extends AppCompatActivity {
@@ -134,8 +138,8 @@ public class SubCategories extends AppCompatActivity {
 
                             CategoryModel categoryModel = new CategoryModel();
                             categoryModel.setCat_id(object.getInt("SubCategoryID"));
-                            categoryModel.setCat_name_en(object.getString("SubCategoryNameEn"));
-                            categoryModel.setCat_name_fr(object.getString("SubCategoryNameFr"));
+                            categoryModel.setCat_name_en(object.getString(userSession.getSubcategoryname()));
+                      //      categoryModel.setCat_name_fr(object.getString("SubCategoryNameFr"));
                             categoryModel.setCat_name_image(object.getString("SubCategoryImage"));
                             categoryModels.add(categoryModel);
                         }
@@ -171,5 +175,24 @@ public class SubCategories extends AppCompatActivity {
         requestQueue.add(loginRequest);
 
     }
+
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
+
 
 }

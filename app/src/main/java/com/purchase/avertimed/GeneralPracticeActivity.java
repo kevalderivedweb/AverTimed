@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -40,6 +43,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class GeneralPracticeActivity extends AppCompatActivity {
@@ -254,16 +258,16 @@ public class GeneralPracticeActivity extends AppCompatActivity {
 
                     Glide.with(GeneralPracticeActivity.this).load(object1.getString("ProductImage")).placeholder(R.drawable.product_1).into(ProductImage);
 
-                    ProductTitle.setText(object1.getString("ProductTitleEn"));
+                    ProductTitle.setText(object1.getString(session.getProductTitle()));
                     ProductPrice.setText(session.getCurremcySign()+" "+object1.getString("Price"));
 
 
                     ProductPriceProduct = session.getCurremcySign()+" "+object1.getString("Price");
 
-                    ProductName = object1.getString("ProductTitleEn");
+                    ProductName = object1.getString(session.getProductTitle());
                     ProductImageUrl = object1.getString("ProductImage");
 
-                    ProductDescription = object1.getString("DescriptionEn");
+                    ProductDescription = object1.getString(session.getDescription());
 
                     Bundle bundle1 = new Bundle();
                     bundle1.putString("Description", ProductDescription);
@@ -312,6 +316,21 @@ public class GeneralPracticeActivity extends AppCompatActivity {
     }
 
 
+    public void setLocale(String lang) {
 
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 
 }

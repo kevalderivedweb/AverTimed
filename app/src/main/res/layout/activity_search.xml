@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recent Keayword"
+                android:text="@string/recent_keyword"
                 android:textSize="18dp"
                 android:layout_weight="1.2"
                 android:textStyle="bold"
@@ -206,7 +206,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recent Search"
+                android:text="@string/recent_search"
                 android:textSize="18dp"
                 android:layout_weight="1.2"
                 android:textStyle="bold"
@@ -250,7 +250,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Data Available"
+            android:text="@string/no_data_available"
             android:textSize="14dp"
             android:layout_weight="1.2"
             android:textStyle="bold"

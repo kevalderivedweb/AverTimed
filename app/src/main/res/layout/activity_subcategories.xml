@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Sub Categories"
+            android:text="@string/sub_category"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="18dp"

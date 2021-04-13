@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Setting"
+            android:text="@string/setting"
             android:layout_gravity="center"
             android:gravity="start"
             android:textSize="18dp"
@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Push Notification"
+                android:text="@string/push_notification"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -84,17 +84,12 @@
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swOnOff"
                 android:layout_width="match_parent"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
-                app:showText="true"
                 android:layout_weight="1.1"
-                android:textSize="1dp"
-                android:textOff=" "
-                android:textOn=" "
                 android:layout_marginRight="10dp"
-                android:textColor="@color/white"
                 app:track="@drawable/custom_track"
-                android:thumb="@drawable/custom_thumb"
-                android:layout_height="wrap_content"/>
+                android:thumb="@drawable/custom_thumb" />
 
         </LinearLayout>
 
@@ -122,7 +117,48 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Change Password"
+                android:text="@string/change_password"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:textSize="14dp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right"
+                android:layout_gravity="center"
+                android:layout_weight="1.4"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/transperant"/>
+
+        <LinearLayout
+            android:id="@+id/ln_changeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/change_pw_bg"
+                android:layout_gravity="center"
+                android:layout_weight="1.3"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_language"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -161,7 +197,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -327,7 +363,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Shipping Address"
+                android:text="@string/shipping_address"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -406,7 +442,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Log Out"
+                android:text="@string/log_out"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"

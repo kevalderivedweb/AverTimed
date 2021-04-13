@@ -34,7 +34,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="Short By Price"/>
+        android:text="@string/short_by_price"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Low - High"/>
+                android:text="@string/low_high"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="50dp"
@@ -157,7 +157,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="Select Category"/>
+        android:text="@string/select_category"/>
 
 
 
@@ -179,7 +179,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="Select Sub Category"/>
+        android:text="@string/select_sub_category"/>
 
     <Spinner
         android:id="@+id/sub_category"

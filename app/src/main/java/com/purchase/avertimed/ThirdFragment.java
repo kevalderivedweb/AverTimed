@@ -55,10 +55,10 @@ public class ThirdFragment extends Fragment {
 
 				CategoryModel categoryModel = new CategoryModel();
 				categoryModel.setCat_id(object5.getInt("ProductID"));
-				categoryModel.setCat_name_en(object5.getString("ProductTitleEn"));
+				categoryModel.setCat_name_en(object5.getString(userSession.getProductTitle()));
 				categoryModel.setCat_name_image(object5.getString("ProductImage"));
-				categoryModel.setDescription(object5.getString("DescriptionEn"));
-				categoryModel.setDescription(object5.getString("DescriptionFr"));
+				categoryModel.setDescription(object5.getString(userSession.getDescription()));
+				//categoryModel.setDescription(object5.getString("DescriptionFr"));
 				categoryModel.setTxt_price(object5.getString("Price"));
 				categoryModels.add(categoryModel);
 			}
@@ -82,4 +82,7 @@ public class ThirdFragment extends Fragment {
 
 		return view;
 	}
+
+
+
 }

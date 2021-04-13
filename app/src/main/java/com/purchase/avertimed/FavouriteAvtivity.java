@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -15,10 +18,12 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.purchase.avertimed.API.UserSession;
 import com.purchase.avertimed.Adapter.WishListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FavouriteAvtivity extends AppCompatActivity {
 
@@ -106,5 +111,20 @@ public class FavouriteAvtivity extends AppCompatActivity {
 
 
     }
+    public void setLocale(String lang) {
 
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 }

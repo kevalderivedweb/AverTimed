@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -35,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AllTopTrends extends AppCompatActivity {
@@ -85,6 +89,13 @@ public class AllTopTrends extends AppCompatActivity {
 
         GetCategory();
 
+        Log.e("getLanguage", session.getLanguage() + "--" +
+                session.getLanguageCode() + "--" +
+                session.getProductTitle() + "--" +
+                session.getCategoryname() + "--" +
+                session.getSubcategoryname() + "--" +
+                session.getDescription());
+
     }
 
     public void GetCategory() {
@@ -121,9 +132,9 @@ public class AllTopTrends extends AppCompatActivity {
                             JSONObject object_top_trends = top_trends.getJSONObject(i);
                             CategoryModel categoryModel = new CategoryModel();
                             categoryModel.setCat_id(object_top_trends.getInt("ProductID"));
-                            categoryModel.setCat_name_en(object_top_trends.getString("ProductTitleEn"));
+                            categoryModel.setCat_name_en(object_top_trends.getString(session.getProductTitle()));
                             categoryModel.setCat_name_image(object_top_trends.getString("ProductImage"));
-                            categoryModel.setDescription(object_top_trends.getString("DescriptionEn"));
+                            categoryModel.setDescription(object_top_trends.getString(session.getDescription()));
                             categoryModel.setTxt_price(object_top_trends.getString("Price"));
                             categoryModels.add(categoryModel);
                         }
@@ -162,6 +173,23 @@ public class AllTopTrends extends AppCompatActivity {
 
         requestQueue.add(loginRequest);
 
+    }
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
     }
 
 }

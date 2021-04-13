@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="First Name"
+                android:text="@string/first_name"
                 android:textColor="@color/gray"
                 android:layout_marginTop="50dp"
                 android:textSize="15dp" />
@@ -149,7 +149,7 @@
                 android:layout_marginBottom="10dp"
                 
                 android:background="@drawable/edit_bg"
-                android:hint="Input your first name"
+                android:hint="@string/input_your_first_name"
                 android:maxLines="1"
                 android:textSize="18dp"
                 android:textColor="#282828"
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="Last Name"
+                android:text="@string/last_name"
                 android:textColor="@color/gray"
                 
                 android:textSize="15dp" />
@@ -174,7 +174,7 @@
                 android:layout_marginBottom="10dp"
                 
                 android:background="@drawable/edit_bg"
-                android:hint="Input your last name"
+                android:hint="@string/input_your_last_name"
                 android:maxLines="1"
                 android:textSize="18dp"
                 android:textColor="#282828"
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="Email"
+                android:text="@string/email"
                 android:textColor="@color/gray"
                 
                 android:textSize="15dp" />
@@ -200,7 +200,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_bg"
                 
-                android:hint="input your email address"
+                android:hint="@string/input_your_address"
                 android:maxLines="1"
                 android:textSize="18dp"
                 android:textColor="#282828"
@@ -212,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="Password"
+                android:text="@string/password"
                 android:textColor="@color/gray"
                 
                 android:textSize="15dp" />
@@ -252,7 +252,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_bg"
-                android:hint="input your password"
+                android:hint="@string/input_your_password"
                 
                 android:maxLines="1"
                 android:textSize="18dp"
@@ -264,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="Confrim Password"
+                android:text="@string/confirm_password"
                 android:textColor="@color/gray"
                 
                 android:textSize="15dp" />
@@ -304,7 +304,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_bg"
-                android:hint="Re-enter your password"
+                android:hint="@string/re_enter_your_password"
                 android:maxLines="1"
                 
                 android:inputType="textPassword"
@@ -319,7 +319,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:layout_marginLeft="10dp"
-                android:text="Currency"
+                android:text="@string/currency"
                 android:textColor="@color/gray"
                 android:textSize="15dp" />
 

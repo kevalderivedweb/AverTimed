@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -250,7 +253,7 @@ public class EditProfile extends AppCompatActivity {
             PackageManager pm = getPackageManager();
             int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, getPackageName());
             if (hasPerm == PackageManager.PERMISSION_GRANTED) {
-                final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.gallary),getString(R.string.cancel)};
+                final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.gallery),getString(R.string.cancel)};
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile.this);
                 builder.setTitle(R.string.select_option);
                 builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -260,7 +263,7 @@ public class EditProfile extends AppCompatActivity {
                             dialog.dismiss();
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             startActivityForResult(intent, PICK_IMAGE_CAMERA);
-                        } else if (options[item].equals(getResources().getString(R.string.gallary))) {
+                        } else if (options[item].equals(getResources().getString(R.string.gallery))) {
                             dialog.dismiss();
                             Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
@@ -532,4 +535,20 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 }

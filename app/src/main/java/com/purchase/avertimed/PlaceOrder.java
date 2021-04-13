@@ -2,9 +2,12 @@ package com.purchase.avertimed;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -53,6 +56,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class PlaceOrder extends AppCompatActivity {
@@ -398,7 +402,7 @@ public class PlaceOrder extends AppCompatActivity {
                     .setAnimationSpeed(2)
                     .setDimAmount(0.5f);
 
-            progressDialog.show();
+         //   progressDialog.show();
 
         }
 
@@ -629,6 +633,21 @@ public class PlaceOrder extends AppCompatActivity {
 
     }
 
+    public void setLocale(String lang) {
 
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 
 }

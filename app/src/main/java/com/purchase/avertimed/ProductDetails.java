@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -36,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
@@ -143,10 +147,10 @@ public class ProductDetails extends AppCompatActivity {
 
                         CategoryModel categoryModel = new CategoryModel();
                         categoryModel.setCat_id(object.getInt("ProductID"));
-                        categoryModel.setCat_name_en(object.getString("ProductTitleEn"));
+                        categoryModel.setCat_name_en(object.getString(userSession.getProductTitle()));
                         categoryModel.setCat_name_image(object.getString("ProductImage"));
-                        categoryModel.setDescription(object.getString("DescriptionEn"));
-                        categoryModel.setDescription(object.getString("DescriptionFr"));
+                        categoryModel.setDescription(object.getString(userSession.getDescription()));
+                   //     categoryModel.setDescription(object.getString("DescriptionFr"));
                         categoryModel.setTxt_price(object.getString("Price"));
                         categoryModels.add(categoryModel);
                     }
@@ -182,5 +186,24 @@ public class ProductDetails extends AppCompatActivity {
         requestQueue.add(loginRequest);
 
     }
+
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
+
 
 }

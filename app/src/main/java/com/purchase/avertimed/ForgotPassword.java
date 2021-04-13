@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,9 +27,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.purchase.avertimed.API.ForgotRequest;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.purchase.avertimed.API.UserSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -118,5 +124,23 @@ public class ForgotPassword extends AppCompatActivity {
         loginRequest.setShouldCache(false);
 
         requestQueue.add(loginRequest);
+    }
+
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
     }
 }

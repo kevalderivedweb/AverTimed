@@ -114,7 +114,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Favourites"
+                android:text="@string/favourites"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -147,7 +147,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cart"
+                android:text="@string/cart"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -180,7 +180,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="History"
+                android:text="@string/history"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -219,7 +219,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Manage Order"
+                android:text="@string/manage_order"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -258,7 +258,7 @@
                 android:id="@+id/qt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Request Quotation"
+                android:text="@string/request_quotation"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -424,7 +424,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Shipping Address"
+                android:text="@string/shipping_address"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -465,7 +465,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Help Center"
+                android:text="@string/help_center"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -505,7 +505,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Log Out"
+                android:text="@string/log_out"
                 android:gravity="start"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
@@ -563,7 +563,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:textSize="12dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
@@ -589,7 +589,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Categories"
+                    android:text="@string/categories"
                     android:textSize="12dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
@@ -615,7 +615,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Transaction"
+                    android:text="@string/transaction"
                     android:textSize="12dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
@@ -641,7 +641,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="profile"
+                    android:text="@string/profile"
                     android:textSize="12dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"

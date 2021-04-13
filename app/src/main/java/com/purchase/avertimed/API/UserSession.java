@@ -93,6 +93,23 @@ public class UserSession {
     public static final String KEY_CountryName = "CountryName";
     public static final String KEY_PostalCode = "PostalCode";
 
+
+    // for language change
+
+    private static final String LANGUAGENAME = "language";
+    private static final String LANGUAGECODE = "languagecode";
+    private static final String PRODUCTTITLE = "productTitle";
+    private static final String CATEGORYNAME = "categoryName";
+    private static final String SUBCATEGORYNAME = "subCategoryName";
+    private static final String DESCRIPTION = "description";
+    private static final String ISLANCHANGE = "isLangChange";
+
+
+    //for notification
+    private final String NOTIFICATION_ALERT = "notification_alert";
+    private final String FIRST_TIME_NOTIFICATION_ON = "first_time_on";
+
+
     // Constructor
     public UserSession(Context context) {
         this.context = context;
@@ -424,5 +441,92 @@ public class UserSession {
     public String GetFirebasetoken() {
         return pref.getString(KEY_FirebaseToken, "");
     }
+
+
+    public void setLanguageName(String name){
+        editor.putString(LANGUAGENAME,name);
+        editor.commit();
+    }/* public void setLanguageName(String name){
+        editor.putString(LANGUAGENAME,name);
+        editor.commit();
+    }*/
+
+    public String getLanguage(){
+        return pref.getString(LANGUAGENAME,"English");
+    }
+
+    public void setLanguageCode(String name){
+        editor.putString(LANGUAGECODE,name);
+        editor.commit();
+    }
+
+    public String getLanguageCode(){
+        return pref.getString(LANGUAGECODE,"en");
+    }
+
+    public void setDescription(String name){
+        editor.putString(DESCRIPTION,name);
+        editor.commit();
+    }
+
+    public String getDescription(){
+        return pref.getString(DESCRIPTION,"DescriptionEn");
+    }
+
+    public void setProductTitle(String name){
+        editor.putString(PRODUCTTITLE,name);
+        editor.commit();
+    }
+
+    public String getProductTitle(){
+        return pref.getString(PRODUCTTITLE,"ProductTitleEn");
+    }
+
+    public void setCategoryname(String name){
+        editor.putString(CATEGORYNAME,name);
+        editor.commit();
+    }
+
+    public String getCategoryname(){
+        return pref.getString(CATEGORYNAME,"CategoryNameEn");
+    }
+
+    public void setSubcategoryname(String name){
+        editor.putString(SUBCATEGORYNAME,name);
+        editor.commit();
+    }
+
+    public String getSubcategoryname(){
+        return pref.getString(SUBCATEGORYNAME,"SubCategoryNameEn");
+    }
+
+
+    public void setIslanchange(boolean first){
+        editor.putBoolean(ISLANCHANGE, first);
+        editor.commit();
+    }
+
+    public boolean isLangChange(){
+        return pref.getBoolean(ISLANCHANGE,false);
+    }
+
+
+    public void setNOTIFICATION_ALERT(String importantnotify) {
+        editor.putString(NOTIFICATION_ALERT, importantnotify);
+        editor.commit();
+    }
+
+    public String getNOTIFICATION_ALERT() {
+        return pref.getString(NOTIFICATION_ALERT, "1");
+    }
+
+    /*public void setFIRST_TIME_NOTIFICATION_ON(String importantnotify) {
+        editor.putString(FIRST_TIME_NOTIFICATION_ON, importantnotify);
+        editor.commit();
+    }
+
+    public String getFIRST_TIME_NOTIFICATION_ON() {
+        return pref.getString(FIRST_TIME_NOTIFICATION_ON, "1");
+    }*/
 
 }

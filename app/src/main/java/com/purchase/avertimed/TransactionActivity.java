@@ -1,8 +1,11 @@
 package com.purchase.avertimed;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -37,6 +40,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class TransactionActivity extends AppCompatActivity {
@@ -225,8 +229,8 @@ public class TransactionActivity extends AppCompatActivity {
                             Product product  = new Product();
 
                             product.setProductID(String.valueOf(products_details.getInt("ProductID")));
-                            product.setProductTitleEn(products_details.getString("ProductTitleEn"));
-                            product.setProductTitleFr(products_details.getString("ProductTitleFr"));
+                            product.setProductTitleEn(products_details.getString(userSession.getProductTitle()));
+                         //   product.setProductTitleFr(products_details.getString("ProductTitleFr"));
                             product.setProductCode(products_details.getString("ProductCode"));
                             product.setPrice(String.valueOf(products_details.getInt("Price")));
                             product.setProductImage(products_details.getString("ProductImage"));
@@ -273,7 +277,22 @@ public class TransactionActivity extends AppCompatActivity {
 
     }
 
+    public void setLocale(String lang) {
 
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 
 
 }

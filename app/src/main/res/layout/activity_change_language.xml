@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="@string/change_password"
+            android:text="@string/change_language"
             android:layout_gravity="center"
             android:gravity="start"
             android:textSize="18dp"
@@ -37,7 +37,7 @@
         android:id="@+id/view"
         android:background="@color/gray"/>
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_below="@+id/view"
         android:layout_above="@+id/bottom"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray_2"
-                android:text="@string/old_password"
+                android:text="Old Password"
                 android:layout_gravity="center"
                 android:gravity="start"
                 android:textSize="15dp"
@@ -64,7 +64,7 @@
                 android:id="@+id/old_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_your_old_password"
+                android:hint="Input your old password"
                 android:background="@drawable/edit_bg_3"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray_2"
-                android:text="@string/new_password"
+                android:text="New Password"
                 android:layout_gravity="center"
                 android:gravity="start"
                 android:textSize="15dp"
@@ -87,7 +87,7 @@
                 android:id="@+id/new_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_your_new_password"
+                android:hint="input your new passsword"
                 android:background="@drawable/edit_bg_3"
                 android:layout_marginTop="5dp"
                 android:textSize="15dp"
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray_2"
-                android:text="@string/confirm_password"
+                android:text="Confrim Password"
                 android:layout_gravity="center"
                 android:gravity="start"
                 android:textSize="15dp"
@@ -111,7 +111,7 @@
                 android:id="@+id/confrim_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_your_confirm_password"
+                android:hint="Input your confrim password"
                 android:background="@drawable/edit_bg_3"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
@@ -123,7 +123,7 @@
                 android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/update"
+                android:text="Update"
                 android:textSize="16dp"
                 android:textStyle="normal"
                 android:layout_gravity="center"
@@ -139,7 +139,17 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </ScrollView>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/setting_language"
+        android:layout_below="@+id/one"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"

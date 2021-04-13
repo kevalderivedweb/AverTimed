@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Manage Order"
+            android:text="@string/manage_order"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="18dp"
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Current Order"
+                android:text="@string/current_order"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Past Order"
+                android:text="@string/past_order"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textColor="@color/black"

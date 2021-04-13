@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:elevation="2dp"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/mlanguage_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:textStyle="bold"
+                android:letterSpacing="0.02"
+                android:text="English"
+                android:textColor="#CC000000"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:textStyle="bold"
+                android:letterSpacing="0.02"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:visibility="invisible"
+                android:text="English"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/selected_img"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1.3"
+                android:src="@drawable/tick"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

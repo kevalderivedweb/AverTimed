@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_bg_3"
-            android:hint=" Brand, Model, Product Name"
+            android:hint="@string/brand_model_product_name"
             android:maxLines="1"
             android:drawableLeft="@mipmap/search"
             android:layout_weight="0.7"
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Categories"
+            android:text="@string/categories"
             android:textSize="16dp"
             android:layout_weight="1"
             android:textStyle="bold"
@@ -159,7 +159,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show All"
+            android:text="@string/show_all"
             android:textSize="14dp"
             android:layout_weight="1.2"
             android:textStyle="normal"
@@ -200,7 +200,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Top Trends"
+            android:text="@string/top_trends"
             android:textSize="16dp"
             android:layout_weight="1"
             android:textStyle="bold"
@@ -214,7 +214,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show All"
+            android:text="@string/show_all"
             android:textSize="14dp"
             android:layout_weight="1.2"
             android:textStyle="normal"
@@ -338,7 +338,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Home"
+                android:text="@string/home"
                 android:textColor="@color/white"
                 android:textSize="12dp" />
 
@@ -362,7 +362,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Categories"
+                android:text="@string/categories"
                 android:textSize="12dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
@@ -388,7 +388,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Transaction"
+                android:text="@string/transaction"
                 android:textSize="12dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
@@ -414,7 +414,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="profile"
+                android:text="@string/profile"
                 android:textSize="12dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"

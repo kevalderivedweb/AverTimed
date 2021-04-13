@@ -2,10 +2,13 @@ package com.purchase.avertimed;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -54,6 +57,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
@@ -265,10 +269,10 @@ public class SearchActivity extends AppCompatActivity {
 
                         CategoryModel categoryModel = new CategoryModel();
                         categoryModel.setCat_id(object.getInt("ProductID"));
-                        categoryModel.setCat_name_en(object.getString("ProductTitleEn"));
+                        categoryModel.setCat_name_en(object.getString(userSession.getProductTitle()));
                         categoryModel.setCat_name_image(object.getString("ProductImage"));
-                        categoryModel.setDescription(object.getString("DescriptionEn"));
-                        categoryModel.setDescription(object.getString("DescriptionFr"));
+                        categoryModel.setDescription(object.getString(userSession.getDescription()));
+                   //     categoryModel.setDescription(object.getString("DescriptionFr"));
                         categoryModel.setTxt_price(object.getString("Price"));
                         categoryModels_NewProduct.add(categoryModel);
                     }
@@ -353,7 +357,7 @@ public class SearchActivity extends AppCompatActivity {
 
                                     for (int i = 0; i < jsonObject1.length(); i++) {
                                         JSONObject object = jsonObject1.getJSONObject(i);
-                                        City[i] =  object.getString("CategoryNameEn");
+                                        City[i] =  object.getString(userSession.getCategoryname());
                                         CityId[i] =  object.getString("CategoryID");
                                     }
 
@@ -429,7 +433,7 @@ public class SearchActivity extends AppCompatActivity {
 
                                     for (int i = 0; i < jsonObject1.length(); i++) {
                                         JSONObject object = jsonObject1.getJSONObject(i);
-                                        City[i] =  object.getString("SubCategoryNameEn");
+                                        City[i] =  object.getString(userSession.getSubcategoryname());
                                         CityId[i] =  object.getString("SubCategoryID");
                                     }
 
@@ -577,5 +581,22 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserSession userSession = new UserSession(this);
+        setLocale(userSession.getLanguageCode());
+    }
 
 }

@@ -30,4 +30,6 @@ public class ChatDetails extends AppCompatActivity {
         });
 
     }
+
+
 }
