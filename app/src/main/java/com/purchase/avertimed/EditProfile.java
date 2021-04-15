@@ -461,9 +461,11 @@ public class EditProfile extends AppCompatActivity {
 
         progressDialog.show();
 
+        Log.e("profilePic", file + "--");
+
 
         AndroidNetworking.upload(ServerUtils.BASE_URL+"update-profile")
-                .addMultipartFile("ProfileImage",file)
+                .addMultipartFile("profile_image",file)
                 .addHeaders("Accept","application/json")
                 .addHeaders("Authorization","Bearer "+ session.getAPIToken())
                 .addMultipartParameter("FirstName",FS)
